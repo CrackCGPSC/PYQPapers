@@ -137,8 +137,15 @@
             <div id="home-quick-actions-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
         </section>
 
-        <!-- Dynamic Grid (Home Cards / Folders / PDFs) -->
-        <div id="content-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+        <!-- HOME CARDS SECTION WRAPPER (WITH HEADING ABOVE CARDS) -->
+        <section id="home-cards-wrapper" class="space-y-3">
+            <div id="home-cards-heading-box" class="hidden">
+                <h2 id="home-cards-section-heading" class="text-lg sm:text-xl font-extrabold text-slate-900"></h2>
+            </div>
+
+            <!-- Dynamic Grid (Home Cards / Folders / PDFs) -->
+            <div id="content-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+        </section>
 
         <!-- Empty State -->
         <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300">
@@ -161,7 +168,7 @@
         </div>
     </footer>
 
-    <!-- STYLISH POP-UP MESSAGE MODAL (NO "INSTANT ALERT" BADGE) -->
+    <!-- STYLISH POP-UP MESSAGE MODAL -->
     <div id="promo-popup-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
         <div class="animate-pop-in bg-gradient-to-b from-white to-slate-50 rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border border-white/60 relative">
             <button onclick="closePromoPopup()" aria-label="Close popup" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm transition z-10">
@@ -181,7 +188,7 @@
                     <button onclick="closePromoPopup()" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-600 font-semibold text-xs hover:bg-slate-100 transition">
                         Later
                     </button>
-                    <a id="promo-popup-cta" href="https://t.me" target="_blank" rel="noopener noreferrer" onclick="closePromoPopup()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-xs shadow-md shadow-blue-500/25 flex items-center justify-center gap-1.5 transition">
+                    <a id="promo-popup-cta" href="https://t.me" target="_blank" rel="noopener noreferrer" onclick="handlePopupCtaClick(event)" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-xs shadow-md shadow-blue-500/25 flex items-center justify-center gap-1.5 transition">
                         <span id="promo-popup-cta-label">Join</span>
                         <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
                     </a>
@@ -238,8 +245,20 @@
                     <button onclick="switchAdminTab('github')" id="tab-btn-github" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">9. GitHub Sync</button>
                 </div>
 
-                <!-- SECTION 1: HOME CARDS + TOP TWO-ROW ACTION BUTTONS BOX -->
+                <!-- SECTION 1: HOME CARDS HEADING + TWO-ROW ACTION BUTTONS + HOME CARDS -->
                 <div id="admin-tab-homecards" class="bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-5">
+                    <!-- Home Cards Section Heading -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2.5">
+                        <h3 class="text-xs font-bold uppercase text-amber-950">Home Cards Section Heading</h3>
+                        <p class="text-[11px] text-amber-800">Jahan se Home Page Cards start hote hain, uske upar dikhne wala heading text set karein.</p>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" id="set-home-cards-heading" placeholder="e.g. Exam Categories / Select Your Exam" class="flex-grow border border-amber-300 rounded-lg px-3 py-2 text-xs bg-white">
+                            <button onclick="saveHomeCardsHeadingLocally()" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-xs font-bold shrink-0">
+                                Save Heading
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- Two-Row Action Buttons Box Manager -->
                     <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 space-y-3">
                         <div class="flex items-center justify-between flex-wrap gap-2">
@@ -308,7 +327,7 @@
                     <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2">
                         <div>
                             <p class="text-xs font-bold text-emerald-950">Home Articles & YouTube Videos Manager</p>
-                            <p class="text-[11px] text-emerald-800">Home cards ke neeche text articles (Heading, Body, Conclusion, Bold/Italic/Size, Clickable Links, Table) aur YouTube videos (Shorts & Normal) add karein.</p>
+                            <p class="text-[11px] text-emerald-800">Home cards ke neeche text articles (Heading, Body, Conclusion, Bold/Italic/Size, Clickable Links, Table with Links) aur YouTube videos (Shorts & Normal) add karein.</p>
                         </div>
                         <button onclick="openArticleModal('create')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm">
                             <i class="fas fa-plus"></i> Add Article / Video
@@ -570,20 +589,23 @@
                 <!-- SECTION 9: GITHUB FINE-GRAINED TOKEN CONFIG -->
                 <div id="admin-tab-github" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-3">
                     <p class="text-xs text-amber-700 bg-amber-50 p-2.5 rounded-lg border border-amber-200">
-                        Apne GitHub Fine-Grained Token ko <b>Contents: Read & Write</b> permission ke saath yahan save karein.
+                        Apni repository ka <b>Username</b>, <b>Repo Name</b>, <b>Branch</b> aur <b>Fine-Grained Token (Contents: Read & Write)</b> yahan save karein taaki sabhi users ke phone par live update dikhe.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="text-xs font-bold text-gray-600">GitHub Username / Org</label>
-                            <input type="text" id="gh-owner" placeholder="e.g. saketgirigoswami" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                            <input type="text" id="gh-owner" placeholder="e.g. crackcgpsc" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-gray-600">Repository Name</label>
-                            <input type="text" id="gh-repo" placeholder="e.g. pyq-papers" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                            <input type="text" id="gh-repo" placeholder="e.g. PYQ-Papers" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
                         </div>
                         <div>
-                            <label class="text-xs font-bold text-gray-600">JSON File Path</label>
-                            <input type="text" id="gh-path" value="pyq_database.json" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                            <label class="text-xs font-bold text-gray-600">Branch & JSON File Path</label>
+                            <div class="grid grid-cols-3 gap-1.5 mt-1">
+                                <input type="text" id="gh-branch" value="main" placeholder="main" class="border rounded-lg px-2.5 py-2 text-xs">
+                                <input type="text" id="gh-path" value="pyq_database.json" class="col-span-2 border rounded-lg px-2.5 py-2 text-xs">
+                            </div>
                         </div>
                         <div>
                             <label class="text-xs font-bold text-gray-600">Fine-Grained Personal Access Token</label>
@@ -605,7 +627,7 @@
         </div>
     </div>
 
-    <!-- CREATE / EDIT FOLDER OR QUESTION PAPER MODAL (WITH HELD ON DATE) -->
+    <!-- CREATE / EDIT FOLDER OR QUESTION PAPER MODAL -->
     <div id="item-form-modal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
             <div class="bg-slate-800 text-white px-4 py-3 flex items-center justify-between">
@@ -785,8 +807,13 @@
                 </div>
 
                 <div>
-                    <label class="font-bold text-gray-700">Table Structure (Optional -- | Header 1 | Header 2 | format)</label>
-                    <textarea id="art-table" rows="3" placeholder="| Exam | Year | Status&#10;| CGPSC | 2025 | Released&#10;| Vyapam | 2025 | Updated" class="w-full border rounded-lg px-3 py-2 text-xs font-mono mt-1"></textarea>
+                    <div class="flex items-center justify-between flex-wrap gap-1 mb-1">
+                        <label class="font-bold text-gray-700">Table Structure (Cells ke andar bhi [Link Text](https://...) use kar sakte hain)</label>
+                        <button type="button" onclick="insertEmbeddedLinkSnippet('art-table')" class="bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded text-[11px] font-bold">
+                            + Table Link
+                        </button>
+                    </div>
+                    <textarea id="art-table" rows="3" placeholder="| Exam | Year | Link&#10;| CGPSC | 2025 | [Open Paper](https://example.com)&#10;| Vyapam | 2025 | [Syllabus](https://example.com)" class="w-full border rounded-lg px-3 py-2 text-xs font-mono"></textarea>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -822,9 +849,10 @@
 
         const DEFAULT_GH_OWNER = "saketgirigoswami";
         const DEFAULT_GH_REPO = "pyq-papers";
+        const DEFAULT_GH_BRANCH = "main";
         const DEFAULT_GH_PATH = "pyq_database.json";
 
-        const CACHE_STORAGE_KEY = "pyq_portal_silent_cache_v1";
+        const CACHE_STORAGE_KEY = "pyq_portal_silent_cache_v2";
 
         const ICON_SLOTS = [
             { key: "brandLogo", label: "Header & Drawer Brand Logo", defaultFa: "fa-graduation-cap", defaultBg: true },
@@ -850,6 +878,7 @@
             settings: {
                 mainTitle: "PYQ Papers",
                 subTitle: "All Govt Exam Papers",
+                homeCardsHeading: "",
                 footerTitle: "PYQ Papers",
                 footerTagline: "All Govt Exam Previous Year Question Papers",
                 searchEnabled: true,
@@ -949,7 +978,78 @@
         let isPopstateNavigation = false;
 
         // ==========================================
-        // 2. SILENT CACHE & INITIALIZE
+        // 2. DESKTOP TELEGRAM SMART HANDLER
+        // ==========================================
+        function isTelegramUrl(url) {
+            const u = (url || '').trim().toLowerCase();
+            return u.startsWith('https://t.me/') || u.startsWith('http://t.me/') || u.startsWith('t.me/') || u.startsWith('tg://');
+        }
+
+        function buildTelegramWebUrl(rawUrl) {
+            const trimmed = (rawUrl || '').trim();
+            if (!trimmed) return 'https://web.telegram.org/k/';
+
+            if (trimmed.startsWith('tg://')) {
+                const domainMatch = trimmed.match(/domain=([a-zA-Z0-9_]+)/);
+                if (domainMatch && domainMatch[1]) {
+                    return `https://t.me/${domainMatch[1]}`;
+                }
+                return 'https://web.telegram.org/k/';
+            }
+
+            let normalized = trimmed.startsWith('t.me/') ? `https://${trimmed}` : trimmed;
+            try {
+                const parsed = new URL(normalized);
+                const parts = parsed.pathname.split('/').filter(Boolean);
+                if (parts.length === 1 && parts[0] !== 's') {
+                    // Opening web view / public preview smoothly without getting stuck on desktop app prompt
+                    return `https://t.me/${parts[0]}`;
+                }
+                return parsed.toString();
+            } catch (e) {
+                return normalized;
+            }
+        }
+
+        function openSmartLink(rawUrl) {
+            const trimmed = (rawUrl || '').trim();
+            if (!trimmed) return;
+
+            if (isTelegramUrl(trimmed)) {
+                const isDesktop = !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+                const webUrl = buildTelegramWebUrl(trimmed);
+                if (isDesktop) {
+                    const win = window.open(webUrl, '_blank', 'noopener,noreferrer');
+                    // If desktop telegram protocol handler blocks or leaves blank, fallback to Telegram Web
+                    setTimeout(() => {
+                        try {
+                            if (!win || win.closed || win.location.href === 'about:blank') {
+                                window.open('https://web.telegram.org/k/', '_blank', 'noopener,noreferrer');
+                            }
+                        } catch (e) {}
+                    }, 900);
+                    return;
+                }
+                window.open(webUrl, '_blank', 'noopener,noreferrer');
+                return;
+            }
+
+            window.open(trimmed, '_blank', 'noopener,noreferrer');
+        }
+
+        function handlePopupCtaClick(event) {
+            const href = document.getElementById('promo-popup-cta').getAttribute('href') || '';
+            if (isTelegramUrl(href)) {
+                event.preventDefault();
+                closePromoPopup();
+                openSmartLink(href);
+                return;
+            }
+            closePromoPopup();
+        }
+
+        // ==========================================
+        // 3. SILENT CACHE & GITHUB FETCH (MAIN + MASTER)
         // ==========================================
         function mergeLoadedData(loaded) {
             const merged = {
@@ -960,6 +1060,7 @@
                 settings: {
                     ...appData.settings,
                     ...(loaded.settings || {}),
+                    homeCardsHeading: loaded.settings?.homeCardsHeading !== undefined ? loaded.settings.homeCardsHeading : (appData.settings.homeCardsHeading || ""),
                     noticeStrip: {
                         enabled: loaded.settings?.noticeStrip?.enabled !== false,
                         items: Array.isArray(loaded.settings?.noticeStrip?.items)
@@ -1036,6 +1137,20 @@
             renderPublicView(false);
         }
 
+        async function fetchRemoteDatabaseJson(owner, repo, branch, path) {
+            const branchesToTry = [branch, branch === 'main' ? 'master' : 'main'].filter((v, i, arr) => v && arr.indexOf(v) === i);
+            for (const b of branchesToTry) {
+                const rawUrl = `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(b)}/${path}?cb=${Date.now()}`;
+                try {
+                    const res = await fetch(rawUrl, { cache: 'no-store' });
+                    if (res.ok) {
+                        return await res.json();
+                    }
+                } catch (e) {}
+            }
+            return null;
+        }
+
         async function initApp() {
             loadGithubConfigToInputs();
             window.history.replaceState({ stack: [] }, '', window.location.href);
@@ -1053,18 +1168,13 @@
 
             const owner = localStorage.getItem('gh_owner') || DEFAULT_GH_OWNER;
             const repo = localStorage.getItem('gh_repo') || DEFAULT_GH_REPO;
+            const branch = localStorage.getItem('gh_branch') || DEFAULT_GH_BRANCH;
             const path = localStorage.getItem('gh_path') || DEFAULT_GH_PATH;
 
-            const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}?t=${Date.now()}`;
-            try {
-                const res = await fetch(rawUrl);
-                if (res.ok) {
-                    const loaded = await res.json();
-                    appData = mergeLoadedData(loaded);
-                    saveSilentCache(appData);
-                }
-            } catch (e) {
-                // Silent fallback
+            const loaded = await fetchRemoteDatabaseJson(owner, repo, branch, path);
+            if (loaded) {
+                appData = mergeLoadedData(loaded);
+                saveSilentCache(appData);
             }
 
             if (sessionStorage.getItem('is_admin') === 'true') {
@@ -1077,7 +1187,7 @@
         }
 
         // ==========================================
-        // 3. GOOGLE DRIVE IMAGE & ICON RESOLVER
+        // 4. GOOGLE DRIVE IMAGE & ICON RESOLVER
         // ==========================================
         function extractDriveFileId(rawUrl) {
             const trimmed = (rawUrl || '').trim();
@@ -1234,14 +1344,14 @@
             const container = document.getElementById('social-links-container');
             container.innerHTML = `
                 ${soc.youtube ? `<a href="${escapeHtml(soc.youtube)}" target="_blank" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>` : ''}
-                ${soc.telegram ? `<a href="${escapeHtml(soc.telegram)}" target="_blank" class="hover:text-sky-400 transition"><i class="fab fa-telegram"></i></a>` : ''}
+                ${soc.telegram ? `<a href="${escapeHtml(soc.telegram)}" onclick="event.preventDefault(); openSmartLink('${escapeJs(soc.telegram)}');" class="hover:text-sky-400 transition"><i class="fab fa-telegram"></i></a>` : ''}
                 ${soc.instagram ? `<a href="${escapeHtml(soc.instagram)}" target="_blank" class="hover:text-pink-500 transition"><i class="fab fa-instagram"></i></a>` : ''}
                 ${soc.facebook ? `<a href="${escapeHtml(soc.facebook)}" target="_blank" class="hover:text-blue-500 transition"><i class="fab fa-facebook"></i></a>` : ''}
             `;
         }
 
         // ==========================================
-        // 4. CLICKABLE MULTIPLE NOTIFICATIONS STRIP
+        // 5. CLICKABLE MULTIPLE NOTIFICATIONS STRIP
         // ==========================================
         function renderClickableNoticeStrip() {
             const stripBar = document.getElementById('notification-strip-bar');
@@ -1269,7 +1379,7 @@
             if (!item) return;
 
             if (item.targetType === 'url') {
-                if (item.url) window.open(item.url.trim(), '_blank', 'noopener,noreferrer');
+                if (item.url) openSmartLink(item.url.trim());
                 return;
             }
 
@@ -1282,7 +1392,6 @@
                 return;
             }
 
-            // Default: folder
             if (item.targetId) {
                 const folderPath = findFolderPathById(appData.items, item.targetId);
                 if (folderPath && folderPath.length > 0) {
@@ -1294,7 +1403,7 @@
         }
 
         // ==========================================
-        // 5. EXPANDABLE SEARCH & DRAWER MENU
+        // 6. EXPANDABLE SEARCH & DRAWER MENU
         // ==========================================
         function toggleSearchBox() {
             const panel = document.getElementById('search-input-panel');
@@ -1329,7 +1438,7 @@
                 alert(`${label} ka link abhi Admin Studio mein set nahi kiya gaya hai.`);
                 return;
             }
-            window.open(url.trim(), '_blank', 'noopener,noreferrer');
+            openSmartLink(url.trim());
         }
 
         function renderDrawerMenu() {
@@ -1413,7 +1522,7 @@
         }
 
         // ==========================================
-        // 6. SEARCH WITH LIVE SUGGESTIONS
+        // 7. SEARCH WITH LIVE SUGGESTIONS
         // ==========================================
         function collectAllEntries(nodes, trail = []) {
             let results = [];
@@ -1511,7 +1620,7 @@
         });
 
         // ==========================================
-        // 7. MOBILE BACK BUTTON STEP-BY-STEP NAVIGATION
+        // 8. MOBILE BACK BUTTON STEP-BY-STEP NAVIGATION
         // ==========================================
         function pushHistoryState(stack) {
             if (isPopstateNavigation) return;
@@ -1543,7 +1652,7 @@
         });
 
         // ==========================================
-        // 8. PUBLIC VIEW (ACTION BOX + CARDS + HELD ON + ARTICLES + YT)
+        // 9. PUBLIC VIEW (ACTION BOX + HEADING + CARDS + ARTICLES + TABLE LINKS + YT)
         // ==========================================
         function getCurrentFolderItems(stack) {
             let current = appData.items;
@@ -1585,7 +1694,7 @@
             const btn = (appData.homeActionButtons || [])[index];
             if (!btn) return;
             if (btn.targetType === 'url') {
-                if (btn.url) window.open(btn.url.trim(), '_blank', 'noopener,noreferrer');
+                if (btn.url) openSmartLink(btn.url.trim());
             } else if (btn.folderId) {
                 openHomeCard(btn.folderId);
             }
@@ -1613,13 +1722,27 @@
             }).join('');
         }
 
+        function renderHomeCardsHeading() {
+            const box = document.getElementById('home-cards-heading-box');
+            const el = document.getElementById('home-cards-section-heading');
+            const headingText = (appData.settings?.homeCardsHeading || '').trim();
+
+            if (publicPathStack.length !== 0 || !headingText) {
+                box.classList.add('hidden');
+                el.innerText = '';
+                return;
+            }
+
+            box.classList.remove('hidden');
+            el.innerText = headingText;
+        }
+
         function formatRichTextWithLinks(rawText) {
             const text = String(rawText || '');
-            // Convert [Link Text](https://...) safely
             const linkPlaceholderMap = [];
             const tokenized = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_, label, url) => {
                 const token = `@@LINK_TOKEN_${linkPlaceholderMap.length}@@`;
-                linkPlaceholderMap.push(`<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-semibold hover:text-blue-800">${escapeHtml(label)}</a>`);
+                linkPlaceholderMap.push(`<a href="${escapeHtml(url)}" onclick="event.preventDefault(); openSmartLink('${escapeJs(url)}');" class="text-blue-600 underline font-semibold hover:text-blue-800">${escapeHtml(label)}</a>`);
                 return token;
             });
 
@@ -1646,7 +1769,7 @@
                 <div class="overflow-x-auto my-3 rounded-xl border border-slate-200">
                     <table class="w-full text-left border-collapse text-xs sm:text-sm">
                         <thead class="bg-slate-100 text-slate-800">
-                            <tr>${headers.map(h => `<th class="py-2 px-3 border-b font-bold">${escapeHtml(h)}</th>`).join('')}</tr>
+                            <tr>${headers.map(h => `<th class="py-2 px-3 border-b font-bold">${formatRichTextWithLinks(h)}</th>`).join('')}</tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 bg-white">
                             ${bodyRows.map(r => `<tr>${r.map(c => `<td class="py-2 px-3 text-gray-700">${formatRichTextWithLinks(c)}</td>`).join('')}</tr>`).join('')}
@@ -1744,6 +1867,7 @@
             if (pushState) pushHistoryState(publicPathStack);
 
             renderHomeActionButtonsBox();
+            renderHomeCardsHeading();
             renderHomeArticlesSection();
 
             const grid = document.getElementById('content-grid');
@@ -1920,7 +2044,7 @@
         }
 
         // ==========================================
-        // 9. DIRECT GOOGLE DRIVE OPENER
+        // 10. DIRECT GOOGLE DRIVE OPENER
         // ==========================================
         function normalizeDriveViewUrl(url) {
             const trimmed = (url || '').trim();
@@ -1942,7 +2066,7 @@
         }
 
         // ==========================================
-        // 10. POP-UP SYSTEM
+        // 11. POP-UP SYSTEM
         // ==========================================
         function getAllConfiguredPopups() {
             const list = [];
@@ -2026,7 +2150,7 @@
         }, { passive: true });
 
         // ==========================================
-        // 11. FULL SCREEN ADMIN STUDIO
+        // 12. FULL SCREEN ADMIN STUDIO
         // ==========================================
         function openAdminModal() {
             document.getElementById('admin-modal').classList.remove('hidden');
@@ -2066,6 +2190,7 @@
             document.getElementById('admin-dashboard-view').classList.remove('hidden');
 
             const s = appData.settings || {};
+            document.getElementById('set-home-cards-heading').value = s.homeCardsHeading || '';
             document.getElementById('set-main-title').value = s.mainTitle || 'PYQ Papers';
             document.getElementById('set-sub-title').value = s.subTitle || 'All Govt Exam Papers';
             document.getElementById('set-search-placeholder').value = s.searchPlaceholder || 'Search paper...';
@@ -2121,7 +2246,14 @@
             if (tab === 'menu') populateNoticeTargetPickers();
         }
 
-        // --- Section 1A: Two-Row Action Buttons Box ---
+        // --- Section 1A: Home Cards Heading ---
+        function saveHomeCardsHeadingLocally() {
+            appData.settings.homeCardsHeading = document.getElementById('set-home-cards-heading').value.trim();
+            renderHomeCardsHeading();
+            alert("Home Cards Heading update ho gayi! Sabhi users ko dikhane ke liye 'Save & Publish to GitHub' dabayein.");
+        }
+
+        // --- Section 1B: Two-Row Action Buttons Box ---
         function renderAdminActionButtons() {
             const list = document.getElementById('admin-action-btns-list');
             const btns = appData.homeActionButtons || [];
@@ -2216,7 +2348,7 @@
             renderHomeActionButtonsBox();
         }
 
-        // --- Section 1B: Home Cards ---
+        // --- Section 1C: Home Cards ---
         function getAllFoldersFlat(nodes, prefix = '') {
             let out = [];
             for (const node of (nodes || [])) {
@@ -2322,7 +2454,7 @@
             renderPublicView(false);
         }
 
-        // --- Section 2: Folders & Question Papers (With Held On Date) ---
+        // --- Section 2: Folders & Question Papers ---
         function renderAdminFolderView() {
             const list = document.getElementById('admin-items-list');
             const backBtn = document.getElementById('admin-back-btn');
@@ -2981,12 +3113,13 @@
         }
 
         // ==========================================
-        // 12. GITHUB API INTEGRATION (FINE-GRAINED TOKEN)
+        // 13. GITHUB API INTEGRATION (FINE-GRAINED TOKEN)
         // ==========================================
         function saveGithubConfig() {
             localStorage.setItem('gh_owner', document.getElementById('gh-owner').value.trim());
             localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
-            localStorage.setItem('gh_path', document.getElementById('gh-path').value.trim());
+            localStorage.setItem('gh_branch', (document.getElementById('gh-branch').value.trim() || 'main'));
+            localStorage.setItem('gh_path', (document.getElementById('gh-path').value.trim() || 'pyq_database.json'));
             localStorage.setItem('gh_token', document.getElementById('gh-token').value.trim());
             alert("GitHub Config browser mein save ho gayi!");
         }
@@ -2994,19 +3127,21 @@
         function loadGithubConfigToInputs() {
             document.getElementById('gh-owner').value = localStorage.getItem('gh_owner') || DEFAULT_GH_OWNER;
             document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || DEFAULT_GH_REPO;
+            document.getElementById('gh-branch').value = localStorage.getItem('gh_branch') || DEFAULT_GH_BRANCH;
             document.getElementById('gh-path').value = localStorage.getItem('gh_path') || DEFAULT_GH_PATH;
             document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
         }
 
         async function pushToGitHub() {
-            const owner = localStorage.getItem('gh_owner') || DEFAULT_GH_OWNER;
-            const repo = localStorage.getItem('gh_repo') || DEFAULT_GH_REPO;
-            const path = localStorage.getItem('gh_path') || DEFAULT_GH_PATH;
-            const token = localStorage.getItem('gh_token');
+            const owner = (localStorage.getItem('gh_owner') || document.getElementById('gh-owner').value || '').trim();
+            const repo = (localStorage.getItem('gh_repo') || document.getElementById('gh-repo').value || '').trim();
+            const branch = (localStorage.getItem('gh_branch') || document.getElementById('gh-branch').value || 'main').trim();
+            const path = (localStorage.getItem('gh_path') || document.getElementById('gh-path').value || 'pyq_database.json').trim();
+            const token = (localStorage.getItem('gh_token') || document.getElementById('gh-token').value || '').trim();
 
-            if (!token) {
+            if (!owner || !repo || !token) {
                 switchAdminTab('github');
-                return alert("Pehle 9. GitHub Sync tab mein apna Fine-Grained Token save karein!");
+                return alert("9. GitHub Sync tab mein Username, Repo Name aur Fine-Grained Token (Contents: Read & Write) daal kar save karein!");
             }
 
             const btn = document.getElementById('publish-btn');
@@ -3014,12 +3149,15 @@
             btn.disabled = true;
             status.innerText = "Publishing to GitHub...";
 
-            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${path}`;
 
             try {
                 let sha = null;
-                const getRes = await fetch(apiUrl, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json'
+                    }
                 });
                 if (getRes.ok) {
                     const fileData = await getRes.json();
@@ -3033,11 +3171,13 @@
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         message: "Update PYQ Papers portal via Admin Studio",
                         content: base64Content,
+                        branch: branch,
                         ...(sha && { sha })
                     })
                 });
@@ -3045,15 +3185,15 @@
                 if (putRes.ok) {
                     saveSilentCache(appData);
                     status.innerText = "Live on GitHub!";
-                    alert("Safaltapurvak GitHub par save ho gaya!");
+                    alert("Safaltapurvak GitHub par publish ho gaya! Sabhi devices par update dikhega.");
                 } else {
                     const err = await putRes.json();
-                    status.innerText = "Error!";
-                    alert("GitHub Error: " + (err.message || "Token permissions check karein"));
+                    status.innerText = "Publish Failed!";
+                    alert("GitHub Publish Error: " + (err.message || "Username, Repo Name aur Token 'Contents: Read & Write' permission check karein."));
                 }
             } catch (error) {
                 status.innerText = "Network Error";
-                alert("Error: " + error.message);
+                alert("GitHub Sync Error: " + error.message);
             } finally {
                 btn.disabled = false;
             }
