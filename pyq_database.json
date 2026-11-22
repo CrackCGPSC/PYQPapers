@@ -18,15 +18,33 @@
         "platform": "telegram",
         "message": "Join Telegram Channel For Quick Update",
         "ctaText": "Join",
-        "link": "https://t.me",
+        "link": "https://t.me/CgpsccgvyapamPYQ",
         "customIcon": ""
       },
       "extra": []
     },
     "customIcons": {
-      "brandLogo": "https://cdn-icons-png.flaticon.com/512/3330/3330314.png"
+      "brandLogo": "https://cdn-icons-png.flaticon.com/512/3330/3330314.png",
+      "menuIcon": "",
+      "searchIcon": "",
+      "homeCardDefault": "",
+      "folderIcon": "",
+      "pdfIcon": "",
+      "pyqMenuIcon": "",
+      "topicMenuIcon": "",
+      "cbtMenuIcon": ""
     },
-    "iconBgConfig": {},
+    "iconBgConfig": {
+      "brandLogo": false,
+      "menuIcon": false,
+      "searchIcon": false,
+      "homeCardDefault": true,
+      "folderIcon": true,
+      "pdfIcon": true,
+      "pyqMenuIcon": false,
+      "topicMenuIcon": false,
+      "cbtMenuIcon": false
+    },
     "textStyles": {},
     "menuLinks": {
       "pyqPractice": "",
