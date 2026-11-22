@@ -2,6 +2,7 @@
   "settings": {
     "mainTitle": "PYQ Papers",
     "subTitle": "All Govt Exam Papers",
+    "homeCardsHeading": "",
     "footerTitle": "PYQ Papers",
     "footerTagline": "All Govt Exam Previous Year Question Papers",
     "searchEnabled": true,
