@@ -11,8 +11,8 @@
       "enabled": true,
       "items": [
         {
-          "id": "nt_migrated",
-          "text": "New Added: Government Exam Previous Year Question Papers, Final Answer Key & Syllabus -- Click any paper to view!",
+          "id": "nt_1",
+          "text": "New Added: Government Exam Previous Year Question Papers -- Tap to open!",
           "targetType": "folder",
           "targetId": "f1",
           "url": ""
@@ -27,33 +27,15 @@
         "platform": "telegram",
         "message": "Join Telegram Channel For Quick Update",
         "ctaText": "Join",
-        "link": "https://t.me/CgpsccgvyapamPYQ",
+        "link": "https://t.me",
         "customIcon": ""
       },
       "extra": []
     },
     "customIcons": {
-      "brandLogo": "https://cdn-icons-png.flaticon.com/512/3330/3330314.png",
-      "menuIcon": "",
-      "searchIcon": "",
-      "homeCardDefault": "",
-      "folderIcon": "",
-      "pdfIcon": "",
-      "pyqMenuIcon": "",
-      "topicMenuIcon": "",
-      "cbtMenuIcon": ""
+      "brandLogo": "https://cdn-icons-png.flaticon.com/512/3330/3330314.png"
     },
-    "iconBgConfig": {
-      "brandLogo": false,
-      "menuIcon": false,
-      "searchIcon": false,
-      "homeCardDefault": false,
-      "folderIcon": true,
-      "pdfIcon": true,
-      "pyqMenuIcon": false,
-      "topicMenuIcon": false,
-      "cbtMenuIcon": false
-    },
+    "iconBgConfig": {},
     "textStyles": {},
     "menuLinks": {
       "pyqPractice": "",
@@ -62,70 +44,19 @@
     },
     "extraMenu": [],
     "socials": {
-      "youtube": "https://youtube.com/@crackcgpsc?si=IQJs7-xG0jNeeriQ",
-      "telegram": "https://t.me/CgpsccgvyapamPYQ",
+      "youtube": "https://youtube.com",
+      "telegram": "https://telegram.org",
       "instagram": "https://instagram.com",
       "facebook": "https://facebook.com"
     }
   },
-  "homeActionButtons": [
-    {
-      "id": "ab_1795356853168",
-      "name": "Free Test Series",
-      "color": "#1d4ed8",
-      "textColor": "#ffffff",
-      "icon": "",
-      "targetType": "url",
-      "folderId": "f1",
-      "url": "https://crackcgpsc.github.io/Testseries/"
-    },
-    {
-      "id": "ab_1795356996965",
-      "name": "Practice CBT",
-      "color": "#00ff00",
-      "textColor": "#000000",
-      "icon": "",
-      "targetType": "url",
-      "folderId": "f1",
-      "url": "https://crackcgpsc.github.io/CBTPlayer/"
-    }
-  ],
+  "homeActionButtons": [],
   "homeCards": [
     {
       "id": "hc_1",
-      "title": "CGPSC",
-      "image": "https://drive.google.com/file/d/1DCszEojnW9UMso7w-ihoDnUPxzkO3s_S/view?usp=drivesdk795358052388&udm=2&sa=X&ved=2ahUKEwjY2dP35ZuYAxU0oGMGHRd4IToQ7Al6BAgQEAM&biw=375&bih=643&dpr=3.25#sv=CAMSZBoyKhBlLVd5Rk5BQjE5UjZWTi1NMg5XeUZOQUIxOVI2Vk4tTToOODMtckdTV2RPQmhFNE0gBCokCg51bTFiSkNRcWpabEotTRIQZS1XeUZOQUIxOVI2Vk4tTRgAMAFKBAgBEAIYByCwgdmWAUoIEAIYASACKAE",
+      "title": "CGPSC Prelims & Mains",
+      "image": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
       "targetFolderId": "f1"
-    },
-    {
-      "id": "hc_1795352432622",
-      "title": "CGSSB / CGVYAPAM",
-      "image": "https://drive.google.com/file/d/1IEqnj0iTGALUEK5NgHnDQyc8EAueaYN_/view?usp=drivesdk",
-      "targetFolderId": "id_1795352196001_ps1z"
-    },
-    {
-      "id": "hc_1795352469886",
-      "title": "Other CG Govt Exams",
-      "image": "",
-      "targetFolderId": "id_1795352234753_sck1"
-    },
-    {
-      "id": "hc_1795352493738",
-      "title": "UPSC",
-      "image": "",
-      "targetFolderId": "id_1795352278011_boss"
-    },
-    {
-      "id": "hc_1795352503431",
-      "title": "SSC",
-      "image": "",
-      "targetFolderId": "id_1795352288115_dgmy"
-    },
-    {
-      "id": "hc_1795352530017",
-      "title": "Other States Govt Exams",
-      "image": "",
-      "targetFolderId": "id_1795352362778_btim"
     }
   ],
   "articles": [],
@@ -133,8 +64,8 @@
     {
       "id": "f1",
       "type": "folder",
-      "title": "CGPSC",
-      "image": "https://drive.google.com/file/d/1DCszEojnW9UMso7w-ihoDnUPxzkO3s_S/view?usp=drivesdk",
+      "title": "CGPSC Prelims & Mains",
+      "image": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
       "children": [
         {
           "id": "f1_2024",
@@ -146,57 +77,14 @@
               "id": "pdf_sample",
               "type": "pdf",
               "title": "CGPSC Prelims GS Paper 1",
+              "heldOn": "",
               "link": "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view",
               "answerKeyLink": "",
-              "syllabusLink": "",
-              "heldOn": "12/02/2025"
-            },
-            {
-              "id": "id_1795353891763_v9xf",
-              "type": "pdf",
-              "title": "Sample Paper",
-              "link": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk",
-              "answerKeyLink": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk",
-              "syllabusLink": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk"
+              "syllabusLink": ""
             }
           ]
         }
       ]
-    },
-    {
-      "id": "id_1795352196001_ps1z",
-      "type": "folder",
-      "title": "CGSSB / CGVYAPAM",
-      "image": "https://drive.google.com/file/d/1IEqnj0iTGALUEK5NgHnDQyc8EAueaYN_/view?usp=drivesdk",
-      "children": []
-    },
-    {
-      "id": "id_1795352234753_sck1",
-      "type": "folder",
-      "title": "Other CG Govt Exams",
-      "image": "",
-      "children": []
-    },
-    {
-      "id": "id_1795352278011_boss",
-      "type": "folder",
-      "title": "UPSC",
-      "image": "",
-      "children": []
-    },
-    {
-      "id": "id_1795352288115_dgmy",
-      "type": "folder",
-      "title": "SSC",
-      "image": "",
-      "children": []
-    },
-    {
-      "id": "id_1795352362778_btim",
-      "type": "folder",
-      "title": "Other States Govt Exams",
-      "image": "",
-      "children": []
     }
   ]
 }
