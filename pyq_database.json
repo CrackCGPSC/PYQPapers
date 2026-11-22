@@ -99,6 +99,14 @@
               "link": "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view",
               "answerKeyLink": "",
               "syllabusLink": ""
+            },
+            {
+              "id": "id_1795353891763_v9xf",
+              "type": "pdf",
+              "title": "Sample Paper",
+              "link": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk",
+              "answerKeyLink": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk",
+              "syllabusLink": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk"
             }
           ]
         }
