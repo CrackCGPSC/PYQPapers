@@ -1,0 +1,78 @@
+{
+  "settings": {
+    "mainTitle": "PYQ Papers",
+    "subTitle": "All Govt Exam Papers",
+    "footerTitle": "PYQ Papers",
+    "footerTagline": "All Govt Exam Previous Year Question Papers",
+    "searchEnabled": true,
+    "searchPlaceholder": "Search paper...",
+    "noticeStrip": {
+      "enabled": true,
+      "text": "New Added: Government Exam Previous Year Question Papers, Final Answer Key & Syllabus -- Click any paper to view!"
+    },
+    "popups": {
+      "primary": {
+        "enabled": true,
+        "trigger": "delay",
+        "delaySec": 30,
+        "platform": "telegram",
+        "message": "Join Telegram Channel For Quick Update",
+        "ctaText": "Join",
+        "link": "https://t.me",
+        "customIcon": ""
+      },
+      "extra": []
+    },
+    "customIcons": {
+      "brandLogo": "https://cdn-icons-png.flaticon.com/512/3330/3330314.png"
+    },
+    "iconBgConfig": {},
+    "textStyles": {},
+    "menuLinks": {
+      "pyqPractice": "",
+      "topicWiseTest": "",
+      "cbtPractice": ""
+    },
+    "extraMenu": [],
+    "socials": {
+      "youtube": "https://youtube.com",
+      "telegram": "https://telegram.org",
+      "instagram": "https://instagram.com",
+      "facebook": "https://facebook.com"
+    }
+  },
+  "homeCards": [
+    {
+      "id": "hc_1",
+      "title": "CGPSC Prelims & Mains",
+      "image": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+      "targetFolderId": "f1"
+    }
+  ],
+  "items": [
+    {
+      "id": "f1",
+      "type": "folder",
+      "title": "CGPSC Prelims & Mains",
+      "image": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+      "children": [
+        {
+          "id": "f1_2024",
+          "type": "folder",
+          "title": "2024 Question Papers",
+          "image": "",
+          "children": [
+            {
+              "id": "pdf_sample",
+              "type": "pdf",
+              "title": "CGPSC Prelims GS Paper 1",
+              "link": "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view",
+              "answerKeyLink": "",
+              "syllabusLink": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
