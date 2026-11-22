@@ -46,7 +46,7 @@
       "brandLogo": false,
       "menuIcon": false,
       "searchIcon": false,
-      "homeCardDefault": true,
+      "homeCardDefault": false,
       "folderIcon": true,
       "pdfIcon": true,
       "pyqMenuIcon": false,
@@ -133,7 +133,7 @@
       "id": "f1",
       "type": "folder",
       "title": "CGPSC",
-      "image": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+      "image": "https://drive.google.com/file/d/1DCszEojnW9UMso7w-ihoDnUPxzkO3s_S/view?usp=drivesdk",
       "children": [
         {
           "id": "f1_2024",
