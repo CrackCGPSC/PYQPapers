@@ -8,7 +8,15 @@
     "searchPlaceholder": "Search paper...",
     "noticeStrip": {
       "enabled": true,
-      "text": "New Added: Government Exam Previous Year Question Papers, Final Answer Key & Syllabus -- Click any paper to view!"
+      "items": [
+        {
+          "id": "nt_migrated",
+          "text": "New Added: Government Exam Previous Year Question Papers, Final Answer Key & Syllabus -- Click any paper to view!",
+          "targetType": "folder",
+          "targetId": "f1",
+          "url": ""
+        }
+      ]
     },
     "popups": {
       "primary": {
@@ -59,6 +67,28 @@
       "facebook": "https://facebook.com"
     }
   },
+  "homeActionButtons": [
+    {
+      "id": "ab_1795356853168",
+      "name": "Free Test Series",
+      "color": "#1d4ed8",
+      "textColor": "#ffffff",
+      "icon": "",
+      "targetType": "url",
+      "folderId": "f1",
+      "url": "https://crackcgpsc.github.io/Testseries/"
+    },
+    {
+      "id": "ab_1795356996965",
+      "name": "Practice CBT",
+      "color": "#00ff00",
+      "textColor": "#000000",
+      "icon": "",
+      "targetType": "url",
+      "folderId": "f1",
+      "url": "https://crackcgpsc.github.io/CBTPlayer/"
+    }
+  ],
   "homeCards": [
     {
       "id": "hc_1",
@@ -97,6 +127,7 @@
       "targetFolderId": "id_1795352362778_btim"
     }
   ],
+  "articles": [],
   "items": [
     {
       "id": "f1",
