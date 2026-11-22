@@ -73,6 +73,41 @@
           ]
         }
       ]
+    },
+    {
+      "id": "id_1795352196001_ps1z",
+      "type": "folder",
+      "title": "CGSSB / CGVYAPAM",
+      "image": "",
+      "children": []
+    },
+    {
+      "id": "id_1795352234753_sck1",
+      "type": "folder",
+      "title": "Other CG Govt Exams",
+      "image": "",
+      "children": []
+    },
+    {
+      "id": "id_1795352278011_boss",
+      "type": "folder",
+      "title": "UPSC",
+      "image": "",
+      "children": []
+    },
+    {
+      "id": "id_1795352288115_dgmy",
+      "type": "folder",
+      "title": "SSC",
+      "image": "",
+      "children": []
+    },
+    {
+      "id": "id_1795352362778_btim",
+      "type": "folder",
+      "title": "Other States Govt Exams",
+      "image": "",
+      "children": []
     }
   ]
 }
