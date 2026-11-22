@@ -47,6 +47,36 @@
       "title": "CGPSC",
       "image": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
       "targetFolderId": "f1"
+    },
+    {
+      "id": "hc_1795352432622",
+      "title": "CGSSB / CGVYAPAM",
+      "image": "",
+      "targetFolderId": "id_1795352196001_ps1z"
+    },
+    {
+      "id": "hc_1795352469886",
+      "title": "Other CG Govt Exams",
+      "image": "",
+      "targetFolderId": "id_1795352234753_sck1"
+    },
+    {
+      "id": "hc_1795352493738",
+      "title": "UPSC",
+      "image": "",
+      "targetFolderId": "id_1795352278011_boss"
+    },
+    {
+      "id": "hc_1795352503431",
+      "title": "SSC",
+      "image": "",
+      "targetFolderId": "id_1795352288115_dgmy"
+    },
+    {
+      "id": "hc_1795352530017",
+      "title": "Other States Govt Exams",
+      "image": "",
+      "targetFolderId": "id_1795352362778_btim"
     }
   ],
   "items": [
