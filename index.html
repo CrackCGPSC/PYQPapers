@@ -1,0 +1,2269 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYQ Papers - All Govt Exam Papers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Lora:ital,wght@0,500;0,700;1,500&family=Montserrat:wght@500;700;800&family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f6f9; }
+        #right-drawer {
+            transition: transform 0.28s ease;
+        }
+        @keyframes marqueeRtl {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee-rtl {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marqueeRtl 18s linear infinite;
+        }
+        .animate-marquee-rtl:hover {
+            animation-play-state: paused;
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.92) translateY(12px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-pop-in {
+            animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-gray-800">
+
+    <!-- HEADER SECTION -->
+    <header class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-lg sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
+            <!-- Brand Logo + Title + Subtitle -->
+            <div onclick="navigateToRoot()" class="flex items-center gap-2.5 cursor-pointer select-none min-w-0">
+                <div id="header-logo-slot" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white p-1 shadow shrink-0 flex items-center justify-center overflow-hidden"></div>
+                <div class="flex flex-col leading-none min-w-0">
+                    <span id="header-main-title" class="text-lg sm:text-2xl font-extrabold tracking-tight truncate">PYQ Papers</span>
+                    <span id="header-sub-title" class="text-[10px] sm:text-xs font-medium tracking-wider mt-0.5 truncate">All Govt Exam Papers</span>
+                </div>
+            </div>
+
+            <!-- Right Controls: Expandable Search + Clean Admin Icon + Menu Button -->
+            <div class="flex items-center gap-2 shrink-0 relative">
+                <!-- Expandable Search Input (Opens when Search Icon is clicked) -->
+                <div id="search-input-panel" class="hidden items-center bg-white text-gray-800 rounded-full px-2.5 py-1 shadow-md border border-amber-300">
+                    <input
+                        type="text"
+                        id="search-input"
+                        oninput="handleSearchInput()"
+                        onfocus="handleSearchInput()"
+                        placeholder="Search paper..."
+                        class="w-32 sm:w-48 bg-transparent text-gray-800 placeholder-gray-400 text-xs focus:outline-none"
+                    >
+                    <button id="clear-search-btn" onclick="clearSearch()" class="hidden text-gray-400 hover:text-gray-700 text-xs ml-1">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+
+                <!-- Search Trigger Icon (Left of Menu Icon) -->
+                <button id="search-trigger-btn" onclick="toggleSearchBox()" aria-label="Search" class="w-9 h-9 rounded-full hover:bg-white/10 text-white flex items-center justify-center text-base transition shrink-0">
+                    <span id="search-icon-slot" class="flex items-center justify-center"></span>
+                </button>
+
+                <!-- Clean Admin Studio Icon (No background box, visible once logged in) -->
+                <button id="top-admin-quick-btn" onclick="toggleAdminModal()" title="Admin Studio" class="hidden text-amber-400 hover:text-amber-300 flex items-center justify-center text-lg px-1 transition shrink-0">
+                    <i class="fas fa-user-cog"></i>
+                </button>
+
+                <!-- Top Right Corner Menu Button -->
+                <button onclick="openRightDrawer()" aria-label="Open Menu" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-base sm:text-lg shrink-0 transition">
+                    <span id="menu-icon-slot" class="flex items-center justify-center"></span>
+                </button>
+
+                <!-- Search Suggestions Dropdown -->
+                <div id="search-suggestions" class="hidden fixed sm:absolute top-14 sm:top-11 right-2 left-2 sm:left-auto sm:w-80 bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-200 max-h-72 overflow-y-auto z-50 divide-y divide-gray-100"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT-TO-LEFT RUNNING NOTIFICATION STRIP -->
+        <div id="notification-strip-bar" class="bg-amber-400 text-slate-950 border-t border-amber-500/40 py-1 overflow-hidden">
+            <div class="max-w-6xl mx-auto px-3 flex items-center gap-2">
+                <span class="bg-slate-900 text-amber-400 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded shrink-0">
+                    <i class="fas fa-bullhorn mr-1"></i>New
+                </span>
+                <div class="overflow-hidden flex-grow">
+                    <p id="notification-marquee-text" class="animate-marquee-rtl text-xs font-bold"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- RIGHT SLIDE DRAWER MENU -->
+    <div id="drawer-backdrop" onclick="closeRightDrawer()" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
+    <aside id="right-drawer" class="fixed top-0 right-0 h-full w-72 bg-slate-900 text-white z-50 translate-x-full shadow-2xl flex flex-col justify-between">
+        <div class="overflow-y-auto">
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="drawer-logo-slot" class="w-9 h-9 rounded-lg bg-white p-0.5 object-contain shrink-0 flex items-center justify-center overflow-hidden"></div>
+                    <div class="leading-tight truncate">
+                        <p id="drawer-title" class="font-bold text-sm truncate">PYQ Papers</p>
+                        <p id="drawer-subtitle" class="text-[11px] text-amber-400 truncate">All Govt Exam Papers</p>
+                    </div>
+                </div>
+                <button onclick="closeRightDrawer()" class="text-gray-400 hover:text-white text-xl px-2">&times;</button>
+            </div>
+
+            <nav id="drawer-nav-list" class="p-3 space-y-1.5 text-sm"></nav>
+        </div>
+
+        <div class="p-4 border-t border-slate-800 text-xs text-gray-400">
+            <span id="drawer-footer-note">All Govt Exam Previous Year Question Papers</span>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-grow">
+
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb-bar" class="hidden mb-5 bg-white px-4 py-2.5 rounded-xl shadow-sm border border-gray-200 flex items-center flex-wrap gap-2 text-sm">
+            <button onclick="navigateToRoot()" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">
+                <i class="fas fa-home"></i> Home
+            </button>
+            <div id="breadcrumb-trail" class="flex items-center flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Loader -->
+        <div id="loader" class="text-center py-16">
+            <i class="fas fa-circle-notch fa-spin text-4xl text-blue-600"></i>
+            <p class="text-sm text-gray-500 mt-2">Papers load ho rahe hain...</p>
+        </div>
+
+        <!-- Dynamic Grid (Home Cards / Folders / PDFs) -->
+        <div id="content-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300">
+            <i class="fas fa-folder-open text-5xl text-gray-300 mb-3"></i>
+            <p class="text-gray-500 font-medium">Is folder mein abhi koi data nahi hai.</p>
+        </div>
+    </main>
+
+    <!-- FOOTER WITH DYNAMIC SOCIAL LINKS -->
+    <footer class="bg-slate-900 text-gray-300 py-6 mt-10">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-center sm:text-left">
+                <p id="footer-brand-title" class="font-bold text-base">PYQ Papers</p>
+                <p id="footer-tagline" class="text-xs text-gray-400">All Govt Exam Previous Year Question Papers</p>
+            </div>
+            <div id="social-links-container" class="flex items-center gap-4 text-xl"></div>
+        </div>
+    </footer>
+
+    <!-- STYLISH POP-UP MESSAGE MODAL (DEFAULT 30s TELEGRAM POPUP + CUSTOM POPUPS) -->
+    <div id="promo-popup-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="animate-pop-in bg-gradient-to-b from-white to-slate-50 rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border border-white/60 relative">
+            <button onclick="closePromoPopup()" aria-label="Close popup" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm transition z-10">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="p-6 text-center space-y-4">
+                <div id="promo-popup-icon-box" class="w-16 h-16 mx-auto rounded-2xl bg-sky-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-sky-500/30">
+                    <i class="fab fa-telegram-plane"></i>
+                </div>
+
+                <div class="space-y-1.5">
+                    <span class="inline-block text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                        Instant Alert
+                    </span>
+                    <h3 id="promo-popup-message" class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">
+                        Join Telegram Channel For Quick Update
+                    </h3>
+                </div>
+
+                <div class="pt-1 flex items-center gap-2.5">
+                    <button onclick="closePromoPopup()" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-600 font-semibold text-xs hover:bg-slate-100 transition">
+                        Later
+                    </button>
+                    <a id="promo-popup-cta" href="https://t.me" target="_blank" rel="noopener noreferrer" onclick="closePromoPopup()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-xs shadow-md shadow-blue-500/25 flex items-center justify-center gap-1.5 transition">
+                        <span id="promo-popup-cta-label">Join</span>
+                        <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULL SCREEN ADMIN STUDIO PAGE -->
+    <div id="admin-modal" class="fixed inset-0 w-screen h-screen bg-slate-100 z-50 hidden flex flex-col overflow-hidden">
+
+        <!-- Full Screen Admin Top Bar -->
+        <div class="bg-slate-900 text-white px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-md shrink-0">
+            <div class="flex items-center gap-2.5">
+                <i class="fas fa-sliders text-amber-400 text-lg"></i>
+                <h2 class="font-bold text-base sm:text-xl">Admin Studio</h2>
+            </div>
+            <button onclick="closeAdminModal()" class="bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition">
+                <i class="fas fa-globe"></i>
+                <span>Back to Website</span>
+            </button>
+        </div>
+
+        <!-- Full Screen Body -->
+        <div class="flex-grow overflow-y-auto">
+            <!-- LOGIN SCREEN -->
+            <div id="admin-login-view" class="max-w-md mx-auto my-10 bg-white p-6 rounded-2xl shadow-lg border space-y-4">
+                <h3 class="text-lg font-extrabold text-slate-900">Admin Login</h3>
+                <p class="text-xs text-gray-500">Login karne ke liye ID aur Password dalein:</p>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">ID</label>
+                    <input type="text" id="login-id" placeholder="Enter ID" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-blue-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Password</label>
+                    <input type="password" id="login-pass" placeholder="Enter Password" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-blue-600">
+                </div>
+                <button onclick="handleAdminLogin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg text-sm transition">
+                    Login
+                </button>
+            </div>
+
+            <!-- DASHBOARD SCREEN -->
+            <div id="admin-dashboard-view" class="hidden max-w-5xl mx-auto p-4 sm:p-6 space-y-5 pb-16">
+
+                <!-- Separate Location Sections Tabs -->
+                <div class="bg-white p-2 rounded-2xl shadow-xs border flex text-xs sm:text-sm font-semibold overflow-x-auto gap-1.5">
+                    <button onclick="switchAdminTab('homecards')" id="tab-btn-homecards" class="px-3 py-2 rounded-xl bg-blue-600 text-white whitespace-nowrap">1. Home Cards</button>
+                    <button onclick="switchAdminTab('pyqtree')" id="tab-btn-pyqtree" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">2. Folders & Papers</button>
+                    <button onclick="switchAdminTab('menu')" id="tab-btn-menu" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">3. Menu & Notice</button>
+                    <button onclick="switchAdminTab('popups')" id="tab-btn-popups" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">4. Pop-Up Rules</button>
+                    <button onclick="switchAdminTab('icons')" id="tab-btn-icons" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">5. Custom Icons</button>
+                    <button onclick="switchAdminTab('style')" id="tab-btn-style" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">6. Text & Box Style</button>
+                    <button onclick="switchAdminTab('layout')" id="tab-btn-layout" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">7. Header & Footer</button>
+                    <button onclick="switchAdminTab('github')" id="tab-btn-github" class="px-3 py-2 rounded-xl text-gray-600 hover:bg-gray-100 whitespace-nowrap">8. GitHub Sync</button>
+                </div>
+
+                <!-- SECTION 1: HOME CARDS -->
+                <div id="admin-tab-homecards" class="bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <p class="text-xs font-bold text-blue-900">Home Page Cards Manager</p>
+                            <p class="text-[11px] text-blue-700">Home page par image + text cards add, edit aur delete karein.</p>
+                        </div>
+                        <button onclick="openHomeCardModal('create')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm">
+                            <i class="fas fa-plus"></i> Add Home Card
+                        </button>
+                    </div>
+                    <div id="admin-home-cards-list" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+                </div>
+
+                <!-- SECTION 2: FOLDERS & PAPERS -->
+                <div id="admin-tab-pyqtree" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-slate-100 p-3 rounded-xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <button onclick="adminGoBack()" id="admin-back-btn" class="hidden bg-white border border-gray-300 hover:bg-gray-50 px-2.5 py-1.5 rounded-lg text-xs font-bold text-gray-700 shrink-0">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <div class="truncate text-xs">
+                                    <span class="inline-block bg-amber-600 text-white font-bold px-2 py-0.5 rounded mr-1.5">Explorer</span>
+                                    <span id="admin-current-path" class="font-bold text-slate-800">Home</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <button onclick="openCreateModal('folder')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition">
+                                <i class="fas fa-folder-plus"></i>
+                                <span>New Folder</span>
+                            </button>
+                            <button onclick="openCreateModal('pdf')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition">
+                                <i class="fas fa-file-circle-plus"></i>
+                                <span>Add Question Paper</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xs font-bold uppercase text-gray-500">Folders & Question Papers</h3>
+                            <span id="admin-item-count" class="text-xs text-gray-400">0 items</span>
+                        </div>
+                        <div id="admin-items-list" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: MENU LINKS + RUNNING NOTIFICATION STRIP -->
+                <div id="admin-tab-menu" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2.5">
+                        <h3 class="text-xs font-bold uppercase text-amber-900">Running Notification Strip (Right to Left)</h3>
+                        <p class="text-[11px] text-amber-800">Naya paper ya update yahan likhein -- yeh header ke neeche right-to-left chalega.</p>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" id="set-notice-text" placeholder="e.g. New Added: CGPSC 2025 Prelims Paper + Final Answer Key & Syllabus Live!" class="flex-grow border border-amber-300 rounded-lg px-3 py-2 text-xs bg-white">
+                            <label class="flex items-center gap-1.5 text-xs font-bold text-amber-950 px-1">
+                                <input type="checkbox" id="set-notice-enabled" class="rounded">
+                                Show Strip
+                            </label>
+                        </div>
+                        <button onclick="saveNoticeStripLocally()" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-1.5 rounded-lg text-xs font-bold">
+                            Update Strip
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-50 border rounded-xl p-4 space-y-3">
+                        <h3 class="text-xs font-bold uppercase text-slate-700">Core Menu Section Links</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">PYQ Practice Link</label>
+                                <input type="url" id="menu-link-pyq" placeholder="https://..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Topic Wise Test Link</label>
+                                <input type="url" id="menu-link-topic" placeholder="https://..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">🖥️ CBT Practice Link</label>
+                                <input type="url" id="menu-link-cbt" placeholder="https://..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                        </div>
+                        <button onclick="saveCoreMenuLinks()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold">
+                            Save Core Links
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-50 border rounded-xl p-4 space-y-3">
+                        <h3 class="text-xs font-bold uppercase text-slate-700">Extra Menu Sections</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
+                            <input type="text" id="extra-menu-icon" placeholder="Icon (e.g. 🖥️ ya fa-book)" class="border rounded-lg px-3 py-2 text-xs bg-white">
+                            <input type="text" id="extra-menu-label" placeholder="Section Name" class="border rounded-lg px-3 py-2 text-xs bg-white">
+                            <input type="url" id="extra-menu-url" placeholder="https://website-link.com" class="border rounded-lg px-3 py-2 text-xs bg-white">
+                            <button onclick="addExtraMenuItem()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">
+                                + Add Section
+                            </button>
+                        </div>
+                        <div id="admin-extra-menu-list" class="space-y-2 max-h-48 overflow-y-auto pt-1"></div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: POP-UP MESSAGES & TRIGGERS -->
+                <div id="admin-tab-popups" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-sky-50 border border-sky-200 rounded-xl p-4 space-y-3">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div>
+                                <h3 class="text-xs font-bold uppercase text-sky-900">Primary Pop-Up Message (Default 30 Sec Telegram Alert)</h3>
+                                <p class="text-[11px] text-sky-800">Time (seconds), Trigger Action, Message, Button Text, Link aur Social/Icon set karein.</p>
+                            </div>
+                            <label class="flex items-center gap-1.5 text-xs font-bold text-sky-950">
+                                <input type="checkbox" id="popup-primary-enabled" class="rounded">
+                                Enabled
+                            </label>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                            <div>
+                                <label class="font-bold text-gray-700">Trigger After</label>
+                                <select id="popup-primary-trigger" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                                    <option value="delay">Time Delay (Seconds)</option>
+                                    <option value="scroll">Page Scroll (40%)</option>
+                                    <option value="paper_click">On Question Paper Click</option>
+                                    <option value="folder_open">On Folder Open</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-bold text-gray-700">Delay Seconds (e.g. 30)</label>
+                                <input type="number" min="1" id="popup-primary-delay" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                            </div>
+                            <div>
+                                <label class="font-bold text-gray-700">Social Platform / Icon</label>
+                                <select id="popup-primary-platform" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                                    <option value="telegram">Telegram (fab fa-telegram-plane)</option>
+                                    <option value="youtube">YouTube (fab fa-youtube)</option>
+                                    <option value="instagram">Instagram (fab fa-instagram)</option>
+                                    <option value="facebook">Facebook (fab fa-facebook)</option>
+                                    <option value="whatsapp">WhatsApp (fab fa-whatsapp)</option>
+                                    <option value="custom">Custom Icon / Drive Link</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="font-bold text-gray-700">Pop-Up Message</label>
+                                <input type="text" id="popup-primary-message" placeholder="Join Telegram Channel For Quick Update" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                            </div>
+                            <div>
+                                <label class="font-bold text-gray-700">Button Text</label>
+                                <input type="text" id="popup-primary-cta-text" placeholder="Join" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                            </div>
+                            <div>
+                                <label class="font-bold text-gray-700">Target Link (Telegram / Channel / Website)</label>
+                                <input type="url" id="popup-primary-link" placeholder="https://t.me/yourchannel" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                            </div>
+                            <div>
+                                <label class="font-bold text-gray-700">Custom Icon / Drive Link (Optional)</label>
+                                <input type="text" id="popup-primary-custom-icon" placeholder="https://drive.google.com/... ya fa-bell" class="w-full border rounded-lg px-2.5 py-2 bg-white mt-1">
+                            </div>
+                        </div>
+
+                        <button onclick="savePrimaryPopupLocally()" class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-lg text-xs font-bold">
+                            Save Primary Pop-Up
+                        </button>
+                    </div>
+
+                    <!-- Additional Pop-Up Rules -->
+                    <div class="bg-slate-50 border rounded-xl p-4 space-y-3">
+                        <h3 class="text-xs font-bold uppercase text-slate-700">Additional Pop-Up Messages & Triggers</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+                            <select id="extra-popup-trigger" class="border rounded-lg px-2.5 py-2 bg-white">
+                                <option value="delay">Trigger: Time Delay</option>
+                                <option value="scroll">Trigger: On Scroll (40%)</option>
+                                <option value="paper_click">Trigger: On Paper Click</option>
+                                <option value="folder_open">Trigger: On Folder Open</option>
+                            </select>
+                            <input type="number" min="0" id="extra-popup-delay" placeholder="Delay Sec (e.g. 15)" class="border rounded-lg px-2.5 py-2 bg-white">
+                            <select id="extra-popup-platform" class="border rounded-lg px-2.5 py-2 bg-white">
+                                <option value="telegram">Telegram</option>
+                                <option value="youtube">YouTube</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="custom">Custom Icon / Drive Link</option>
+                            </select>
+                            <input type="text" id="extra-popup-message" placeholder="Pop-up Message" class="border rounded-lg px-2.5 py-2 bg-white">
+                            <input type="text" id="extra-popup-cta" placeholder="Button Label (e.g. Join / Open)" class="border rounded-lg px-2.5 py-2 bg-white">
+                            <input type="url" id="extra-popup-link" placeholder="https://link.com" class="border rounded-lg px-2.5 py-2 bg-white">
+                            <input type="text" id="extra-popup-icon" placeholder="Custom Icon / Drive Link" class="border rounded-lg px-2.5 py-2 bg-white sm:col-span-2">
+                            <button onclick="addExtraPopupRule()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg">
+                                + Add Pop-Up Rule
+                            </button>
+                        </div>
+
+                        <div id="admin-extra-popups-list" class="space-y-2 max-h-52 overflow-y-auto pt-1"></div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: CUSTOM ICONS (WITH ICON BACKGROUND BOX OPTION) -->
+                <div id="admin-tab-icons" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-3">
+                        <p class="text-xs font-bold text-blue-900">Website All Icons Customizer</p>
+                        <p class="text-[11px] text-blue-700">Google Drive link ya image URL dalein aur choose karein ki icon ke peeche background box rakhna hai ya nahi.</p>
+                    </div>
+                    <div id="admin-custom-icons-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-1"></div>
+                    <button onclick="saveCustomIconsLocally()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold">
+                        Apply Custom Icons
+                    </button>
+                </div>
+
+                <!-- SECTION 6: TEXT FONT, COLOUR, SIZE, STYLE & BACKGROUND BOX -->
+                <div id="admin-tab-style" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-purple-50 border border-purple-100 rounded-xl p-3">
+                        <p class="text-xs font-bold text-purple-900">Typography & Text Background Box</p>
+                        <p class="text-[11px] text-purple-700">Har text area ka Font, Size, Colour, Bold/Italic aur Text ke peeche Background Box (On/Off + Colour) set karein.</p>
+                    </div>
+                    <div id="admin-text-styles-list" class="space-y-3 max-h-96 overflow-y-auto pr-1"></div>
+                    <button onclick="saveTextStylesLocally()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold">
+                        Apply Text & Box Styles
+                    </button>
+                </div>
+
+                <!-- SECTION 7: HEADER & FOOTER -->
+                <div id="admin-tab-layout" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-4">
+                    <div class="bg-slate-50 border rounded-xl p-4 space-y-3">
+                        <h3 class="text-xs font-bold uppercase text-slate-700">Header Text & Search</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Main Title</label>
+                                <input type="text" id="set-main-title" class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Sub Title</label>
+                                <input type="text" id="set-sub-title" class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Search Placeholder</label>
+                                <input type="text" id="set-search-placeholder" class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <label class="flex items-center gap-2 text-xs font-bold text-gray-700 pt-5">
+                                <input type="checkbox" id="set-search-enabled" class="rounded">
+                                Search Icon Show Karein
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border rounded-xl p-4 space-y-3">
+                        <h3 class="text-xs font-bold uppercase text-slate-700">Footer & Social Links</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Footer Brand Title</label>
+                                <input type="text" id="set-footer-title" class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Footer Tagline</label>
+                                <input type="text" id="set-footer-tagline" class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">YouTube URL</label>
+                                <input type="url" id="set-yt" placeholder="https://youtube.com/..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Telegram URL</label>
+                                <input type="url" id="set-tg" placeholder="https://t.me/..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Instagram URL</label>
+                                <input type="url" id="set-ig" placeholder="https://instagram.com/..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-600">Facebook URL</label>
+                                <input type="url" id="set-fb" placeholder="https://facebook.com/..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1 bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="updateLayoutSettingsLocally()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold">
+                        Apply Header & Footer
+                    </button>
+                </div>
+
+                <!-- SECTION 8: GITHUB FINE-GRAINED TOKEN CONFIG -->
+                <div id="admin-tab-github" class="hidden bg-white p-4 sm:p-5 rounded-2xl shadow-xs border space-y-3">
+                    <p class="text-xs text-amber-700 bg-amber-50 p-2.5 rounded-lg border border-amber-200">
+                        Apne GitHub Fine-Grained Token ko <b>Contents: Read & Write</b> permission ke saath yahan save karein.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-xs font-bold text-gray-600">GitHub Username / Org</label>
+                            <input type="text" id="gh-owner" placeholder="e.g. saketgirigoswami" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-600">Repository Name</label>
+                            <input type="text" id="gh-repo" placeholder="e.g. pyq-papers" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-600">JSON File Path</label>
+                            <input type="text" id="gh-path" value="pyq_database.json" class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-600">Fine-Grained Personal Access Token</label>
+                            <input type="password" id="gh-token" placeholder="github_pat_..." class="w-full border rounded-lg px-3 py-2 text-xs mt-1">
+                        </div>
+                    </div>
+                    <button onclick="saveGithubConfig()" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold">Save Token in Browser</button>
+                </div>
+
+                <!-- GLOBAL PUBLISH TO GITHUB BAR -->
+                <div class="bg-white p-4 rounded-2xl shadow-xs border flex items-center justify-between gap-3">
+                    <span id="sync-status" class="text-xs text-gray-500"></span>
+                    <button onclick="pushToGitHub()" id="publish-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-lg flex items-center gap-2">
+                        <i class="fab fa-github"></i> Save & Publish to GitHub
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE / EDIT FOLDER OR QUESTION PAPER MODAL -->
+    <div id="item-form-modal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="bg-slate-800 text-white px-4 py-3 flex items-center justify-between">
+                <h3 id="item-form-title" class="font-bold text-sm">Add Folder</h3>
+                <button onclick="closeItemFormModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+            </div>
+            <div class="p-4 space-y-3">
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Name / Title</label>
+                    <input type="text" id="modal-item-title" placeholder="e.g. CGPSC Prelims GS Paper 1 (2024)" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                </div>
+
+                <div id="modal-field-image">
+                    <label class="text-xs font-bold text-gray-600">Folder Icon / Image Link (Drive Link ya URL)</label>
+                    <input type="url" id="modal-item-image" placeholder="https://drive.google.com/... ya image link" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                </div>
+
+                <div id="modal-field-pdf-fields" class="hidden space-y-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-600">Question Paper Link (Google Drive)</label>
+                        <input type="url" id="modal-item-link" placeholder="https://drive.google.com/file/d/xxxx/view" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-emerald-700">Final Answer Key Link (Optional)</label>
+                        <input type="url" id="modal-item-answer-key" placeholder="https://drive.google.com/file/d/xxxx/view" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-blue-700">Syllabus Link (Optional)</label>
+                        <input type="url" id="modal-item-syllabus" placeholder="https://drive.google.com/file/d/xxxx/view" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button onclick="closeItemFormModal()" class="px-4 py-2 rounded-lg border text-xs font-semibold text-gray-600">Cancel</button>
+                    <button onclick="saveItemFormModal()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE / EDIT HOME CARD MODAL -->
+    <div id="home-card-modal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="bg-slate-800 text-white px-4 py-3 flex items-center justify-between">
+                <h3 id="home-card-modal-title" class="font-bold text-sm">Add Home Card</h3>
+                <button onclick="closeHomeCardModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+            </div>
+            <div class="p-4 space-y-3">
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Card Title (Image ke neeche dikhega)</label>
+                    <input type="text" id="hc-title" placeholder="e.g. CGPSC / CGVYAPAM / Police SI" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Clickable Image URL (Drive Link ya Image URL)</label>
+                    <input type="url" id="hc-image" placeholder="https://drive.google.com/... ya image link" class="w-full border rounded-lg px-3 py-2 text-sm mt-1">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Target Folder</label>
+                    <select id="hc-target-folder" class="w-full border rounded-lg px-3 py-2 text-sm mt-1 bg-white"></select>
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button onclick="closeHomeCardModal()" class="px-4 py-2 rounded-lg border text-xs font-semibold text-gray-600">Cancel</button>
+                    <button onclick="saveHomeCardModal()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold">Save Card</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. CREDENTIALS & REPO SETTINGS
+        // ==========================================
+        const ADMIN_ID = "Adminsaket";
+        const ADMIN_PASS = "qwertypad1";
+
+        const DEFAULT_GH_OWNER = "saketgirigoswami";
+        const DEFAULT_GH_REPO = "pyq-papers";
+        const DEFAULT_GH_PATH = "pyq_database.json";
+
+        const ICON_SLOTS = [
+            { key: "brandLogo", label: "Header & Drawer Brand Logo", defaultFa: "fa-graduation-cap", defaultBg: true },
+            { key: "menuIcon", label: "Top Right Menu Button Icon", defaultFa: "fa-bars", defaultBg: false },
+            { key: "searchIcon", label: "Search Icon", defaultFa: "fa-search", defaultBg: false },
+            { key: "homeCardDefault", label: "Home Card Default Image/Icon", defaultFa: "fa-layer-group", defaultBg: true },
+            { key: "folderIcon", label: "Folder Icon", defaultFa: "fa-folder", defaultBg: true },
+            { key: "pdfIcon", label: "Question Paper PDF Icon", defaultFa: "fa-file-pdf", defaultBg: true },
+            { key: "pyqMenuIcon", label: "Menu: PYQ Practice Icon", defaultFa: "fa-file-alt", defaultBg: false },
+            { key: "topicMenuIcon", label: "Menu: Topic Wise Test Icon", defaultFa: "fa-list-check", defaultBg: false },
+            { key: "cbtMenuIcon", label: "Menu: CBT Practice Icon", defaultEmoji: "🖥️", defaultBg: false }
+        ];
+
+        const TEXT_STYLE_SLOTS = [
+            { key: "headerMain", label: "Header Main Title", defaultFont: "Poppins", defaultSize: 22, defaultColor: "#ffffff", defaultBold: true, defaultItalic: false, defaultBox: false, defaultBoxColor: "#1e3a8a" },
+            { key: "headerSub", label: "Header Sub Title", defaultFont: "Poppins", defaultSize: 11, defaultColor: "#fbbf24", defaultBold: false, defaultItalic: false, defaultBox: false, defaultBoxColor: "#0f172a" },
+            { key: "homeCardTitle", label: "Home Card Title", defaultFont: "Poppins", defaultSize: 16, defaultColor: "#1f2937", defaultBold: true, defaultItalic: false, defaultBox: false, defaultBoxColor: "#fef3c7" },
+            { key: "itemTitle", label: "Folder & Paper Title", defaultFont: "Poppins", defaultSize: 14, defaultColor: "#1f2937", defaultBold: true, defaultItalic: false, defaultBox: false, defaultBoxColor: "#eff6ff" },
+            { key: "footerTitle", label: "Footer Brand Title", defaultFont: "Poppins", defaultSize: 16, defaultColor: "#ffffff", defaultBold: true, defaultItalic: false, defaultBox: false, defaultBoxColor: "#1e293b" }
+        ];
+
+        let appData = {
+            settings: {
+                mainTitle: "PYQ Papers",
+                subTitle: "All Govt Exam Papers",
+                footerTitle: "PYQ Papers",
+                footerTagline: "All Govt Exam Previous Year Question Papers",
+                searchEnabled: true,
+                searchPlaceholder: "Search paper...",
+                noticeStrip: {
+                    enabled: true,
+                    text: "New Added: Government Exam Previous Year Question Papers, Final Answer Key & Syllabus -- Click any paper to view!"
+                },
+                popups: {
+                    primary: {
+                        enabled: true,
+                        trigger: "delay",
+                        delaySec: 30,
+                        platform: "telegram",
+                        message: "Join Telegram Channel For Quick Update",
+                        ctaText: "Join",
+                        link: "https://t.me",
+                        customIcon: ""
+                    },
+                    extra: []
+                },
+                customIcons: {
+                    brandLogo: "https://cdn-icons-png.flaticon.com/512/3330/3330314.png"
+                },
+                iconBgConfig: {},
+                textStyles: {},
+                menuLinks: {
+                    pyqPractice: "",
+                    topicWiseTest: "",
+                    cbtPractice: ""
+                },
+                extraMenu: [],
+                socials: {
+                    youtube: "https://youtube.com",
+                    telegram: "https://telegram.org",
+                    instagram: "https://instagram.com",
+                    facebook: "https://facebook.com"
+                }
+            },
+            homeCards: [
+                {
+                    id: "hc_1",
+                    title: "CGPSC Prelims & Mains",
+                    image: "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+                    targetFolderId: "f1"
+                }
+            ],
+            items: [
+                {
+                    id: "f1",
+                    type: "folder",
+                    title: "CGPSC Prelims & Mains",
+                    image: "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+                    children: [
+                        {
+                            id: "f1_2024",
+                            type: "folder",
+                            title: "2024 Question Papers",
+                            image: "",
+                            children: [
+                                {
+                                    id: "pdf_sample",
+                                    type: "pdf",
+                                    title: "CGPSC Prelims GS Paper 1",
+                                    link: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view",
+                                    answerKeyLink: "",
+                                    syllabusLink: ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        let publicPathStack = [];
+        let adminPathStack = [];
+
+        let formModalState = { mode: "create", type: "folder", editIndex: null };
+        let homeCardModalState = { mode: "create", editIndex: null };
+
+        let firedPopupIds = new Set();
+        let primaryTimerId = null;
+        let scrollPopupTriggered = false;
+
+        // ==========================================
+        // 2. INITIALIZE & FETCH DATA FROM GITHUB
+        // ==========================================
+        async function initApp() {
+            loadGithubConfigToInputs();
+            const owner = localStorage.getItem('gh_owner') || DEFAULT_GH_OWNER;
+            const repo = localStorage.getItem('gh_repo') || DEFAULT_GH_REPO;
+            const path = localStorage.getItem('gh_path') || DEFAULT_GH_PATH;
+
+            const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}?t=${Date.now()}`;
+            try {
+                const res = await fetch(rawUrl);
+                if (res.ok) {
+                    const loaded = await res.json();
+                    appData = {
+                        ...appData,
+                        ...loaded,
+                        settings: {
+                            ...appData.settings,
+                            ...(loaded.settings || {}),
+                            noticeStrip: {
+                                ...appData.settings.noticeStrip,
+                                ...((loaded.settings && loaded.settings.noticeStrip) || {})
+                            },
+                            popups: {
+                                ...appData.settings.popups,
+                                ...((loaded.settings && loaded.settings.popups) || {}),
+                                primary: {
+                                    ...appData.settings.popups.primary,
+                                    ...(((loaded.settings && loaded.settings.popups && loaded.settings.popups.primary) || {}))
+                                },
+                                extra: Array.isArray(loaded.settings?.popups?.extra) ? loaded.settings.popups.extra : []
+                            },
+                            customIcons: {
+                                ...appData.settings.customIcons,
+                                ...((loaded.settings && loaded.settings.customIcons) || {})
+                            },
+                            iconBgConfig: {
+                                ...appData.settings.iconBgConfig,
+                                ...((loaded.settings && loaded.settings.iconBgConfig) || {})
+                            },
+                            textStyles: {
+                                ...appData.settings.textStyles,
+                                ...((loaded.settings && loaded.settings.textStyles) || {})
+                            },
+                            menuLinks: {
+                                ...appData.settings.menuLinks,
+                                ...((loaded.settings && loaded.settings.menuLinks) || {})
+                            },
+                            socials: {
+                                ...appData.settings.socials,
+                                ...((loaded.settings && loaded.settings.socials) || {})
+                            }
+                        }
+                    };
+                    if (!Array.isArray(appData.homeCards) || appData.homeCards.length === 0) {
+                        appData.homeCards = (appData.items || [])
+                            .filter(i => i.type === 'folder')
+                            .map((f, idx) => ({
+                                id: 'hc_auto_' + idx,
+                                title: f.title,
+                                image: f.image || '',
+                                targetFolderId: f.id
+                            }));
+                    }
+                }
+            } catch (e) {
+                console.log("Using default local structure until first GitHub publish.");
+            }
+
+            if (sessionStorage.getItem('is_admin') === 'true') {
+                document.getElementById('top-admin-quick-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('loader').classList.add('hidden');
+            renderSiteSettings();
+            renderDrawerMenu();
+            renderPublicView();
+            schedulePopups();
+        }
+
+        // ==========================================
+        // 3. DRIVE LINK TO IMAGE HELPER & ICON RENDERER
+        // ==========================================
+        function resolveImageOrDriveUrl(rawUrl) {
+            const trimmed = (rawUrl || '').trim();
+            if (!trimmed) return '';
+            const match = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/) || trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+                return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+            }
+            return trimmed;
+        }
+
+        function isIconBgEnabled(slotKey) {
+            const slotDef = ICON_SLOTS.find(s => s.key === slotKey);
+            const saved = appData.settings?.iconBgConfig?.[slotKey];
+            if (saved !== undefined) return Boolean(saved);
+            return slotDef ? Boolean(slotDef.defaultBg) : true;
+        }
+
+        function renderSlotIcon(slotKey, imgClass = "w-5 h-5 object-contain rounded") {
+            const customUrl = resolveImageOrDriveUrl(appData.settings?.customIcons?.[slotKey] || '');
+            const slotDef = ICON_SLOTS.find(s => s.key === slotKey);
+
+            if (customUrl) {
+                return `<img src="${escapeHtml(customUrl)}" alt="${escapeHtml(slotDef?.label || slotKey)}" class="${imgClass}">`;
+            }
+            if (slotDef?.defaultEmoji) {
+                return `<span class="text-base leading-none">${slotDef.defaultEmoji}</span>`;
+            }
+            return `<i class="fas ${slotDef?.defaultFa || 'fa-circle'}"></i>`;
+        }
+
+        function applyIconBoxClass(el, slotKey, bgClasses = "bg-white p-1 shadow", noBgClasses = "bg-transparent") {
+            if (!el) return;
+            const enabled = isIconBgEnabled(slotKey);
+            bgClasses.split(' ').filter(Boolean).forEach(c => el.classList.toggle(c, enabled));
+            noBgClasses.split(' ').filter(Boolean).forEach(c => el.classList.toggle(c, !enabled));
+        }
+
+        function getTextStyle(slotKey) {
+            const def = TEXT_STYLE_SLOTS.find(s => s.key === slotKey) || {
+                defaultFont: "Poppins",
+                defaultSize: 14,
+                defaultColor: "#1f2937",
+                defaultBold: false,
+                defaultItalic: false,
+                defaultBox: false,
+                defaultBoxColor: "#f3f4f6"
+            };
+            const saved = appData.settings?.textStyles?.[slotKey] || {};
+            return {
+                fontFamily: saved.fontFamily || def.defaultFont,
+                fontSize: Number(saved.fontSize) || def.defaultSize,
+                color: saved.color || def.defaultColor,
+                bold: saved.bold !== undefined ? Boolean(saved.bold) : def.defaultBold,
+                italic: saved.italic !== undefined ? Boolean(saved.italic) : def.defaultItalic,
+                boxEnabled: saved.boxEnabled !== undefined ? Boolean(saved.boxEnabled) : def.defaultBox,
+                boxColor: saved.boxColor || def.defaultBoxColor
+            };
+        }
+
+        function buildInlineTextStyle(slotKey) {
+            const st = getTextStyle(slotKey);
+            const parts = [
+                `font-family: '${st.fontFamily}', sans-serif`,
+                `font-size: ${st.fontSize}px`,
+                `color: ${st.color}`,
+                `font-weight: ${st.bold ? '700' : '400'}`,
+                `font-style: ${st.italic ? 'italic' : 'normal'}`
+            ];
+            if (st.boxEnabled) {
+                parts.push(`background-color: ${st.boxColor}`);
+                parts.push(`padding: 3px 8px`);
+                parts.push(`border-radius: 6px`);
+                parts.push(`display: inline-block`);
+            }
+            return parts.join('; ');
+        }
+
+        function renderSiteSettings() {
+            const s = appData.settings || {};
+
+            const headerLogoBox = document.getElementById('header-logo-slot');
+            const drawerLogoBox = document.getElementById('drawer-logo-slot');
+            headerLogoBox.innerHTML = renderSlotIcon('brandLogo', 'w-full h-full object-contain');
+            drawerLogoBox.innerHTML = renderSlotIcon('brandLogo', 'w-full h-full object-contain');
+            applyIconBoxClass(headerLogoBox, 'brandLogo', 'bg-white p-1 shadow', 'bg-transparent');
+            applyIconBoxClass(drawerLogoBox, 'brandLogo', 'bg-white p-0.5', 'bg-transparent');
+
+            document.getElementById('menu-icon-slot').innerHTML = renderSlotIcon('menuIcon', 'w-5 h-5 object-contain');
+            document.getElementById('search-icon-slot').innerHTML = renderSlotIcon('searchIcon', 'w-4 h-4 object-contain');
+
+            const mainTitle = s.mainTitle || "PYQ Papers";
+            const subTitle = s.subTitle || "All Govt Exam Papers";
+
+            const mainEl = document.getElementById('header-main-title');
+            const subEl = document.getElementById('header-sub-title');
+            const footerTitleEl = document.getElementById('footer-brand-title');
+
+            mainEl.innerText = mainTitle;
+            mainEl.setAttribute('style', buildInlineTextStyle('headerMain'));
+
+            subEl.innerText = subTitle;
+            subEl.setAttribute('style', buildInlineTextStyle('headerSub'));
+
+            document.getElementById('drawer-title').innerText = mainTitle;
+            document.getElementById('drawer-subtitle').innerText = subTitle;
+
+            footerTitleEl.innerText = s.footerTitle || mainTitle;
+            footerTitleEl.setAttribute('style', buildInlineTextStyle('footerTitle'));
+            document.getElementById('footer-tagline').innerText = s.footerTagline || "All Govt Exam Previous Year Question Papers";
+
+            const searchTrigger = document.getElementById('search-trigger-btn');
+            const searchInput = document.getElementById('search-input');
+            searchTrigger.classList.toggle('hidden', s.searchEnabled === false);
+            if (s.searchEnabled === false) {
+                document.getElementById('search-input-panel').classList.add('hidden');
+                document.getElementById('search-suggestions').classList.add('hidden');
+            }
+            searchInput.placeholder = s.searchPlaceholder || "Search paper...";
+
+            const stripBar = document.getElementById('notification-strip-bar');
+            const stripTextEl = document.getElementById('notification-marquee-text');
+            const noticeEnabled = s.noticeStrip?.enabled !== false;
+            const noticeText = (s.noticeStrip?.text || '').trim();
+            if (noticeEnabled && noticeText) {
+                stripBar.classList.remove('hidden');
+                stripTextEl.innerText = noticeText;
+            } else {
+                stripBar.classList.add('hidden');
+            }
+
+            const soc = s.socials || {};
+            const container = document.getElementById('social-links-container');
+            container.innerHTML = `
+                ${soc.youtube ? `<a href="${escapeHtml(soc.youtube)}" target="_blank" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>` : ''}
+                ${soc.telegram ? `<a href="${escapeHtml(soc.telegram)}" target="_blank" class="hover:text-sky-400 transition"><i class="fab fa-telegram"></i></a>` : ''}
+                ${soc.instagram ? `<a href="${escapeHtml(soc.instagram)}" target="_blank" class="hover:text-pink-500 transition"><i class="fab fa-instagram"></i></a>` : ''}
+                ${soc.facebook ? `<a href="${escapeHtml(soc.facebook)}" target="_blank" class="hover:text-blue-500 transition"><i class="fab fa-facebook"></i></a>` : ''}
+            `;
+        }
+
+        // ==========================================
+        // 4. EXPANDABLE SEARCH BAR
+        // ==========================================
+        function toggleSearchBox() {
+            const panel = document.getElementById('search-input-panel');
+            const input = document.getElementById('search-input');
+            const isHidden = panel.classList.contains('hidden');
+            if (isHidden) {
+                panel.classList.remove('hidden');
+                panel.classList.add('flex');
+                input.focus();
+                handleSearchInput();
+            } else {
+                panel.classList.add('hidden');
+                panel.classList.remove('flex');
+                document.getElementById('search-suggestions').classList.add('hidden');
+            }
+        }
+
+        // ==========================================
+        // 5. RIGHT SLIDE DRAWER & DYNAMIC MENU LINKS
+        // ==========================================
+        function openRightDrawer() {
+            renderDrawerMenu();
+            document.getElementById('drawer-backdrop').classList.remove('hidden');
+            document.getElementById('right-drawer').classList.remove('translate-x-full');
+        }
+
+        function closeRightDrawer() {
+            document.getElementById('drawer-backdrop').classList.add('hidden');
+            document.getElementById('right-drawer').classList.add('translate-x-full');
+        }
+
+        function openExternalMenuLink(url, label) {
+            closeRightDrawer();
+            if (!url || !url.trim()) {
+                alert(`${label} ka link abhi Admin Studio mein set nahi kiya gaya hai.`);
+                return;
+            }
+            window.open(url.trim(), '_blank', 'noopener,noreferrer');
+        }
+
+        function renderDrawerMenu() {
+            const nav = document.getElementById('drawer-nav-list');
+            const links = appData.settings?.menuLinks || {};
+            const extra = appData.settings?.extraMenu || [];
+
+            let html = `
+                <button onclick="navigateToRoot(); closeRightDrawer();" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-white/10 text-left font-medium transition">
+                    <i class="fas fa-home text-blue-400 w-5 text-center"></i>
+                    <span>Home</span>
+                </button>
+                <button onclick="openExternalMenuLink('${escapeJs(links.pyqPractice || '')}', 'PYQ Practice')" class="w-full flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl hover:bg-white/10 text-left font-medium transition">
+                    <span class="flex items-center gap-3">
+                        <span class="w-5 flex items-center justify-center text-emerald-400">${renderSlotIcon('pyqMenuIcon', 'w-4 h-4 object-contain')}</span>
+                        <span>PYQ Practice</span>
+                    </span>
+                    ${links.pyqPractice ? '<i class="fas fa-external-link-alt text-[10px] text-gray-400"></i>' : ''}
+                </button>
+                <button onclick="openExternalMenuLink('${escapeJs(links.topicWiseTest || '')}', 'Topic Wise Test')" class="w-full flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl hover:bg-white/10 text-left font-medium transition">
+                    <span class="flex items-center gap-3">
+                        <span class="w-5 flex items-center justify-center text-purple-400">${renderSlotIcon('topicMenuIcon', 'w-4 h-4 object-contain')}</span>
+                        <span>Topic Wise Test</span>
+                    </span>
+                    ${links.topicWiseTest ? '<i class="fas fa-external-link-alt text-[10px] text-gray-400"></i>' : ''}
+                </button>
+                <button onclick="openExternalMenuLink('${escapeJs(links.cbtPractice || '')}', 'CBT Practice')" class="w-full flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl hover:bg-white/10 text-left font-medium transition">
+                    <span class="flex items-center gap-3">
+                        <span class="w-5 flex items-center justify-center leading-none">${renderSlotIcon('cbtMenuIcon', 'w-4 h-4 object-contain')}</span>
+                        <span>CBT Practice</span>
+                    </span>
+                    ${links.cbtPractice ? '<i class="fas fa-external-link-alt text-[10px] text-gray-400"></i>' : ''}
+                </button>
+            `;
+
+            extra.forEach(sec => {
+                const iconHtml = renderCustomIcon(sec.icon || 'fa-link');
+                html += `
+                    <button onclick="openExternalMenuLink('${escapeJs(sec.url || '')}', '${escapeJs(sec.label || 'Section')}')" class="w-full flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl hover:bg-white/10 text-left font-medium transition">
+                        <span class="flex items-center gap-3 truncate">
+                            <span class="w-5 text-center shrink-0">${iconHtml}</span>
+                            <span class="truncate">${escapeHtml(sec.label)}</span>
+                        </span>
+                        <i class="fas fa-external-link-alt text-[10px] text-gray-400 shrink-0"></i>
+                    </button>
+                `;
+            });
+
+            html += `
+                <div class="pt-2 mt-2 border-t border-slate-800">
+                    <button onclick="closeRightDrawer(); openAdminModal();" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-white/10 text-left font-semibold text-amber-300 transition">
+                        <i class="fas fa-sign-in-alt w-5 text-center"></i>
+                        <span>Login</span>
+                    </button>
+                </div>
+            `;
+
+            nav.innerHTML = html;
+        }
+
+        function renderCustomIcon(iconVal) {
+            const v = (iconVal || '').trim();
+            if (!v) return '<i class="fas fa-link text-sky-400"></i>';
+            if (v.startsWith('http://') || v.startsWith('https://')) {
+                return `<img src="${escapeHtml(resolveImageOrDriveUrl(v))}" class="w-4 h-4 object-contain inline rounded">`;
+            }
+            if (v.startsWith('fa-')) return `<i class="fas ${escapeHtml(v)} text-sky-400"></i>`;
+            return `<span class="text-base leading-none">${escapeHtml(v)}</span>`;
+        }
+
+        function escapeJs(str) {
+            return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // ==========================================
+        // 6. SEARCH WITH LIVE SUGGESTIONS
+        // ==========================================
+        function collectAllEntries(nodes, trail = []) {
+            let results = [];
+            for (const node of (nodes || [])) {
+                const currentTrail = [...trail, { id: node.id, title: node.title }];
+                results.push({
+                    id: node.id,
+                    type: node.type,
+                    title: node.title,
+                    image: node.image || '',
+                    link: node.link || '',
+                    pathIds: trail.map(t => t.id),
+                    pathText: trail.map(t => t.title).join(" / ") || "Home"
+                });
+                if (node.type === 'folder' && Array.isArray(node.children)) {
+                    results = results.concat(collectAllEntries(node.children, currentTrail));
+                }
+            }
+            return results;
+        }
+
+        function handleSearchInput() {
+            const inputEl = document.getElementById('search-input');
+            const clearBtn = document.getElementById('clear-search-btn');
+            const box = document.getElementById('search-suggestions');
+            const q = inputEl.value.trim().toLowerCase();
+
+            clearBtn.classList.toggle('hidden', q.length === 0);
+
+            if (!q) {
+                box.classList.add('hidden');
+                box.innerHTML = '';
+                return;
+            }
+
+            const allEntries = collectAllEntries(appData.items);
+            const matches = allEntries.filter(item =>
+                item.title.toLowerCase().includes(q) || item.pathText.toLowerCase().includes(q)
+            ).slice(0, 12);
+
+            if (matches.length === 0) {
+                box.innerHTML = `<div class="p-3 text-xs text-gray-500 text-center">Koi matching paper ya folder nahi mila.</div>`;
+                box.classList.remove('hidden');
+                return;
+            }
+
+            box.innerHTML = matches.map((m, idx) => `
+                <div onclick="selectSearchSuggestion(${idx})" class="search-suggestion-row p-3 hover:bg-blue-50 cursor-pointer flex items-center justify-between gap-3 transition">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <i class="fas ${m.type === 'folder' ? 'fa-folder text-amber-500' : 'fa-file-pdf text-red-500'} text-base shrink-0"></i>
+                        <div class="truncate">
+                            <p class="text-sm font-semibold text-gray-800 truncate">${escapeHtml(m.title)}</p>
+                            <p class="text-[11px] text-gray-400 truncate">${escapeHtml(m.pathText)}</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600 shrink-0">${m.type}</span>
+                </div>
+            `).join('');
+
+            window.__lastSearchMatches = matches;
+            box.classList.remove('hidden');
+        }
+
+        function selectSearchSuggestion(index) {
+            const matches = window.__lastSearchMatches || [];
+            const item = matches[index];
+            if (!item) return;
+
+            document.getElementById('search-suggestions').classList.add('hidden');
+
+            if (item.type === 'pdf') {
+                triggerPopupsByAction('paper_click');
+                openDrivePdfDirect(item.link, 'Official Question Paper');
+            } else {
+                publicPathStack = [...item.pathIds, item.id];
+                triggerPopupsByAction('folder_open');
+                renderPublicView();
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            document.getElementById('search-suggestions').classList.add('hidden');
+        }
+
+        document.addEventListener('click', function (e) {
+            const box = document.getElementById('search-suggestions');
+            const input = document.getElementById('search-input');
+            const trigger = document.getElementById('search-trigger-btn');
+            if (!box.contains(e.target) && e.target !== input && !trigger.contains(e.target)) {
+                box.classList.add('hidden');
+            }
+        });
+
+        // ==========================================
+        // 7. PUBLIC VIEW (TIRANGA BUTTONS + OFFICIAL QUESTION PAPER + SHARE)
+        // ==========================================
+        function getCurrentFolderItems(stack) {
+            let current = appData.items;
+            for (const folderId of stack) {
+                const found = current.find(item => item.id === folderId);
+                if (found && found.children) {
+                    current = found.children;
+                } else {
+                    return [];
+                }
+            }
+            return current;
+        }
+
+        function findFolderPathById(nodes, targetId, trail = []) {
+            for (const node of (nodes || [])) {
+                if (node.type === 'folder') {
+                    const nextTrail = [...trail, node.id];
+                    if (node.id === targetId) return nextTrail;
+                    const deeper = findFolderPathById(node.children || [], targetId, nextTrail);
+                    if (deeper) return deeper;
+                }
+            }
+            return null;
+        }
+
+        function openHomeCard(targetFolderId) {
+            if (!targetFolderId) return;
+            const path = findFolderPathById(appData.items, targetFolderId);
+            if (path && path.length > 0) {
+                publicPathStack = path;
+                triggerPopupsByAction('folder_open');
+                renderPublicView();
+            }
+        }
+
+        function renderPublicView() {
+            const grid = document.getElementById('content-grid');
+            const empty = document.getElementById('empty-state');
+            renderBreadcrumbs();
+            grid.innerHTML = '';
+
+            if (publicPathStack.length === 0) {
+                const cards = appData.homeCards || [];
+                if (cards.length === 0) {
+                    empty.classList.remove('hidden');
+                    return;
+                }
+                empty.classList.add('hidden');
+
+                const cardTitleStyle = buildInlineTextStyle('homeCardTitle');
+                const hcBg = isIconBgEnabled('homeCardDefault');
+
+                cards.forEach(card => {
+                    const resolvedImg = resolveImageOrDriveUrl(card.image);
+                    const imgContent = resolvedImg
+                        ? `<img src="${escapeHtml(resolvedImg)}" alt="${escapeHtml(card.title)}" class="max-h-full max-w-full object-contain">`
+                        : `<div class="text-4xl text-blue-600 ${hcBg ? 'bg-white p-3 rounded-2xl shadow-xs' : ''}">${renderSlotIcon('homeCardDefault', 'w-14 h-14 object-contain')}</div>`;
+
+                    grid.innerHTML += `
+                        <div onclick="openHomeCard('${escapeJs(card.targetFolderId || '')}')" class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-200 overflow-hidden cursor-pointer transition transform hover:-translate-y-1 flex flex-col">
+                            <div class="h-40 bg-slate-100 flex items-center justify-center p-4">
+                                ${imgContent}
+                            </div>
+                            <div class="p-4 text-center border-t bg-white flex-grow flex items-center justify-center">
+                                <h3 style="${cardTitleStyle}">${escapeHtml(card.title)}</h3>
+                            </div>
+                        </div>
+                    `;
+                });
+                return;
+            }
+
+            const items = getCurrentFolderItems(publicPathStack);
+            if (!items || items.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+
+            const itemTitleStyle = buildInlineTextStyle('itemTitle');
+            const folderBg = isIconBgEnabled('folderIcon');
+            const pdfBg = isIconBgEnabled('pdfIcon');
+
+            items.forEach(item => {
+                if (item.type === 'folder') {
+                    grid.innerHTML += `
+                        <div onclick="openPublicFolder('${escapeJs(item.id)}')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow border border-gray-200 cursor-pointer flex items-center gap-3 transition hover:border-blue-400">
+                            <div class="w-12 h-12 rounded-xl ${folderBg ? 'bg-amber-100 text-amber-600' : 'bg-transparent text-amber-600'} flex items-center justify-center text-2xl shrink-0 overflow-hidden">
+                                ${renderSlotIcon('folderIcon', 'w-8 h-8 object-contain')}
+                            </div>
+                            <div class="truncate">
+                                <h4 class="truncate" style="${itemTitleStyle}">${escapeHtml(item.title)}</h4>
+                                <p class="text-xs text-gray-400 mt-0.5">${(item.children || []).length} items</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (item.type === 'pdf') {
+                    const hasKey = Boolean((item.answerKeyLink || '').trim());
+                    const hasSyllabus = Boolean((item.syllabusLink || '').trim());
+                    const shareUrl = normalizeDriveViewUrl(item.link || '') || window.location.href;
+
+                    grid.innerHTML += `
+                        <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow border border-gray-200 flex flex-col justify-between gap-3 transition hover:border-amber-400">
+                            <div class="flex items-start justify-between gap-2">
+                                <div onclick="triggerPopupsByAction('paper_click'); openDrivePdfDirect('${escapeJs(item.link || '')}', 'Official Question Paper')" class="flex items-center gap-3 cursor-pointer min-w-0">
+                                    <div class="w-11 h-11 rounded-xl ${pdfBg ? 'bg-red-50 text-red-600' : 'bg-transparent text-red-600'} flex items-center justify-center text-xl shrink-0 overflow-hidden">
+                                        ${renderSlotIcon('pdfIcon', 'w-7 h-7 object-contain')}
+                                    </div>
+                                    <div class="min-w-0">
+                                        <h4 class="break-words" style="${itemTitleStyle}">${escapeHtml(item.title)}</h4>
+                                        <span class="inline-block text-[11px] font-bold text-red-600 mt-0.5">
+                                            <i class="fas fa-file-pdf mr-1"></i>Official Question Paper
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <button onclick="sharePaperLink('${escapeJs(item.title)}', '${escapeJs(shareUrl)}')" title="Share Paper" class="text-gray-400 hover:text-blue-600 p-1.5 rounded-lg hover:bg-blue-50 transition shrink-0">
+                                    <i class="fas fa-share-alt text-sm"></i>
+                                </button>
+                            </div>
+
+                            <!-- Indian Flag Style 3 Buttons: Saffron / White (Dark Text) / Green -->
+                            <div class="pt-2 border-t border-gray-100 grid grid-cols-3 gap-1.5">
+                                <button onclick="triggerPopupsByAction('paper_click'); openDrivePdfDirect('${escapeJs(item.link || '')}', 'Official Question Paper')" style="background-color:#FF9933;color:#ffffff;" class="text-[11px] font-bold py-1.5 px-2 rounded-lg shadow-2xs hover:opacity-95 transition text-center truncate">
+                                    Question Paper
+                                </button>
+                                ${hasKey
+                                    ? `<button onclick="openDrivePdfDirect('${escapeJs(item.answerKeyLink)}', 'Final Answer Key')" style="background-color:#ffffff;color:#0f172a;border:1px solid #cbd5e1;" class="text-[11px] font-bold py-1.5 px-2 rounded-lg shadow-2xs hover:bg-slate-50 transition text-center truncate">
+                                        Answer Keys
+                                    </button>`
+                                    : `<span style="background-color:#f8fafc;color:#94a3b8;border:1px solid #e2e8f0;" class="text-[11px] font-semibold py-1.5 px-2 rounded-lg text-center truncate cursor-not-allowed">
+                                        Answer Keys
+                                    </span>`
+                                }
+                                ${hasSyllabus
+                                    ? `<button onclick="openDrivePdfDirect('${escapeJs(item.syllabusLink)}', 'Syllabus')" style="background-color:#138808;color:#ffffff;" class="text-[11px] font-bold py-1.5 px-2 rounded-lg shadow-2xs hover:opacity-95 transition text-center truncate">
+                                        Syllabus
+                                    </button>`
+                                    : `<span style="background-color:#f1f5f9;color:#94a3b8;" class="text-[11px] font-semibold py-1.5 px-2 rounded-lg text-center truncate cursor-not-allowed">
+                                        Syllabus
+                                    </span>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        async function sharePaperLink(title, url) {
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title, text: `${title} - PYQ Papers`, url });
+                    return;
+                } catch (e) {
+                    // User cancelled share
+                }
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(url);
+                    alert("Link copy ho gaya!");
+                    return;
+                } catch (e) {}
+            }
+            prompt("Link copy karein:", url);
+        }
+
+        function openPublicFolder(id) {
+            publicPathStack.push(id);
+            triggerPopupsByAction('folder_open');
+            renderPublicView();
+        }
+
+        function navigateToRoot() {
+            publicPathStack = [];
+            renderPublicView();
+        }
+
+        function navigateToBreadcrumb(index) {
+            publicPathStack = publicPathStack.slice(0, index + 1);
+            renderPublicView();
+        }
+
+        function renderBreadcrumbs() {
+            const bar = document.getElementById('breadcrumb-bar');
+            const trail = document.getElementById('breadcrumb-trail');
+            if (publicPathStack.length === 0) {
+                bar.classList.add('hidden');
+                return;
+            }
+            bar.classList.remove('hidden');
+            trail.innerHTML = '';
+
+            let currentList = appData.items;
+            publicPathStack.forEach((id, idx) => {
+                const folder = currentList.find(x => x.id === id);
+                if (folder) {
+                    trail.innerHTML += `
+                        <span class="text-gray-400">/</span>
+                        <button onclick="navigateToBreadcrumb(${idx})" class="text-gray-700 font-semibold hover:text-blue-600">${escapeHtml(folder.title)}</button>
+                    `;
+                    currentList = folder.children || [];
+                }
+            });
+        }
+
+        // ==========================================
+        // 8. DIRECT GOOGLE DRIVE OPENER
+        // ==========================================
+        function normalizeDriveViewUrl(url) {
+            const trimmed = (url || '').trim();
+            if (!trimmed) return '';
+            const fileIdMatch = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/) || trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (fileIdMatch && fileIdMatch[1]) {
+                return `https://drive.google.com/file/d/${fileIdMatch[1]}/view?usp=drivesdk`;
+            }
+            return trimmed;
+        }
+
+        function openDrivePdfDirect(rawLink, docLabel = 'Document') {
+            const targetUrl = normalizeDriveViewUrl(rawLink);
+            if (!targetUrl) {
+                alert(`${docLabel} ka link abhi add nahi kiya gaya hai.`);
+                return;
+            }
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // ==========================================
+        // 9. POP-UP SYSTEM (30s DEFAULT + CUSTOM TRIGGERS)
+        // ==========================================
+        function getAllConfiguredPopups() {
+            const list = [];
+            const p = appData.settings?.popups?.primary;
+            if (p && p.enabled !== false) {
+                list.push({ id: 'primary_popup', ...p });
+            }
+            const extra = appData.settings?.popups?.extra || [];
+            extra.forEach((item, idx) => {
+                list.push({ id: item.id || ('extra_popup_' + idx), enabled: true, ...item });
+            });
+            return list;
+        }
+
+        function renderPopupIconHtml(popup) {
+            const platform = popup.platform || 'telegram';
+            const customIcon = (popup.customIcon || '').trim();
+            if (platform === 'custom' && customIcon) {
+                if (customIcon.startsWith('http://') || customIcon.startsWith('https://')) {
+                    return `<img src="${escapeHtml(resolveImageOrDriveUrl(customIcon))}" class="w-10 h-10 object-contain rounded-lg">`;
+                }
+                if (customIcon.startsWith('fa-')) {
+                    return `<i class="fas ${escapeHtml(customIcon)}"></i>`;
+                }
+                return `<span class="text-2xl">${escapeHtml(customIcon)}</span>`;
+            }
+            const iconMap = {
+                telegram: 'fab fa-telegram-plane',
+                youtube: 'fab fa-youtube',
+                instagram: 'fab fa-instagram',
+                facebook: 'fab fa-facebook-f',
+                whatsapp: 'fab fa-whatsapp'
+            };
+            return `<i class="${iconMap[platform] || 'fab fa-telegram-plane'}"></i>`;
+        }
+
+        function showPromoPopup(popup) {
+            if (!popup || firedPopupIds.has(popup.id)) return;
+            const modal = document.getElementById('promo-popup-modal');
+            if (!modal.classList.contains('hidden')) return;
+
+            firedPopupIds.add(popup.id);
+            document.getElementById('promo-popup-icon-box').innerHTML = renderPopupIconHtml(popup);
+            document.getElementById('promo-popup-message').innerText = popup.message || 'Join Telegram Channel For Quick Update';
+            document.getElementById('promo-popup-cta-label').innerText = popup.ctaText || 'Join';
+            document.getElementById('promo-popup-cta').href = (popup.link || '').trim() || 'https://t.me';
+
+            modal.classList.remove('hidden');
+        }
+
+        function closePromoPopup() {
+            document.getElementById('promo-popup-modal').classList.add('hidden');
+        }
+
+        function schedulePopups() {
+            if (primaryTimerId) clearTimeout(primaryTimerId);
+            const popups = getAllConfiguredPopups();
+
+            popups.forEach(p => {
+                if ((p.trigger || 'delay') === 'delay' && !firedPopupIds.has(p.id)) {
+                    const sec = Math.max(1, Number(p.delaySec) || 30);
+                    setTimeout(() => showPromoPopup(p), sec * 1000);
+                }
+            });
+        }
+
+        function triggerPopupsByAction(actionName) {
+            const popups = getAllConfiguredPopups();
+            const match = popups.find(p => p.trigger === actionName && !firedPopupIds.has(p.id));
+            if (match) {
+                const delayMs = Math.max(0, (Number(match.delaySec) || 0) * 1000);
+                setTimeout(() => showPromoPopup(match), delayMs);
+            }
+        }
+
+        window.addEventListener('scroll', function () {
+            if (scrollPopupTriggered) return;
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollable > 0 && (window.scrollY / scrollable) >= 0.4) {
+                scrollPopupTriggered = true;
+                triggerPopupsByAction('scroll');
+            }
+        }, { passive: true });
+
+        // ==========================================
+        // 10. FULL SCREEN ADMIN STUDIO
+        // ==========================================
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            if (sessionStorage.getItem('is_admin') === 'true') {
+                document.getElementById('top-admin-quick-btn').classList.remove('hidden');
+                showAdminDashboard();
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            if (modal.classList.contains('hidden')) {
+                openAdminModal();
+            } else {
+                closeAdminModal();
+            }
+        }
+
+        function handleAdminLogin() {
+            const id = document.getElementById('login-id').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            if (id === ADMIN_ID && pass === ADMIN_PASS) {
+                sessionStorage.setItem('is_admin', 'true');
+                document.getElementById('top-admin-quick-btn').classList.remove('hidden');
+                showAdminDashboard();
+            } else {
+                alert("Galat ID ya Password!");
+            }
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('admin-login-view').classList.add('hidden');
+            document.getElementById('admin-dashboard-view').classList.remove('hidden');
+
+            const s = appData.settings || {};
+            document.getElementById('set-main-title').value = s.mainTitle || 'PYQ Papers';
+            document.getElementById('set-sub-title').value = s.subTitle || 'All Govt Exam Papers';
+            document.getElementById('set-search-placeholder').value = s.searchPlaceholder || 'Search paper...';
+            document.getElementById('set-search-enabled').checked = s.searchEnabled !== false;
+            document.getElementById('set-footer-title').value = s.footerTitle || 'PYQ Papers';
+            document.getElementById('set-footer-tagline').value = s.footerTagline || 'All Govt Exam Previous Year Question Papers';
+
+            document.getElementById('set-notice-text').value = s.noticeStrip?.text || '';
+            document.getElementById('set-notice-enabled').checked = s.noticeStrip?.enabled !== false;
+
+            const pri = s.popups?.primary || {};
+            document.getElementById('popup-primary-enabled').checked = pri.enabled !== false;
+            document.getElementById('popup-primary-trigger').value = pri.trigger || 'delay';
+            document.getElementById('popup-primary-delay').value = pri.delaySec ?? 30;
+            document.getElementById('popup-primary-platform').value = pri.platform || 'telegram';
+            document.getElementById('popup-primary-message').value = pri.message || 'Join Telegram Channel For Quick Update';
+            document.getElementById('popup-primary-cta-text').value = pri.ctaText || 'Join';
+            document.getElementById('popup-primary-link').value = pri.link || 'https://t.me';
+            document.getElementById('popup-primary-custom-icon').value = pri.customIcon || '';
+
+            document.getElementById('set-yt').value = s.socials?.youtube || '';
+            document.getElementById('set-tg').value = s.socials?.telegram || '';
+            document.getElementById('set-ig').value = s.socials?.instagram || '';
+            document.getElementById('set-fb').value = s.socials?.facebook || '';
+
+            document.getElementById('menu-link-pyq').value = s.menuLinks?.pyqPractice || '';
+            document.getElementById('menu-link-topic').value = s.menuLinks?.topicWiseTest || '';
+            document.getElementById('menu-link-cbt').value = s.menuLinks?.cbtPractice || '';
+
+            renderAdminHomeCards();
+            renderAdminFolderView();
+            renderAdminExtraMenu();
+            renderAdminExtraPopups();
+            renderAdminCustomIconsTab();
+            renderAdminTextStylesTab();
+        }
+
+        function switchAdminTab(tab) {
+            ['homecards', 'pyqtree', 'menu', 'popups', 'icons', 'style', 'layout', 'github'].forEach(t => {
+                document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+                const btn = document.getElementById(`tab-btn-${t}`);
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tab}`);
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+            activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        }
+
+        // --- Section 1: Home Cards ---
+        function getAllFoldersFlat(nodes, prefix = '') {
+            let out = [];
+            for (const node of (nodes || [])) {
+                if (node.type === 'folder') {
+                    const label = prefix ? `${prefix} / ${node.title}` : node.title;
+                    out.push({ id: node.id, label });
+                    out = out.concat(getAllFoldersFlat(node.children || [], label));
+                }
+            }
+            return out;
+        }
+
+        function renderAdminHomeCards() {
+            const list = document.getElementById('admin-home-cards-list');
+            const cards = appData.homeCards || [];
+            if (cards.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400 text-center py-6 bg-gray-50 rounded-xl border border-dashed">Koi Home Card nahi hai.</p>`;
+                return;
+            }
+
+            list.innerHTML = cards.map((card, idx) => {
+                const imgUrl = resolveImageOrDriveUrl(card.image);
+                return `
+                    <div class="flex items-center justify-between bg-white border border-gray-200 p-2.5 rounded-xl gap-3">
+                        <div class="flex items-center gap-3 min-w-0">
+                            ${imgUrl
+                                ? `<img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(card.title)}" class="w-11 h-11 rounded-lg object-cover border bg-gray-100 shrink-0">`
+                                : `<div class="w-11 h-11 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">${renderSlotIcon('homeCardDefault', 'w-7 h-7 object-contain')}</div>`
+                            }
+                            <div class="truncate">
+                                <p class="font-bold text-sm text-gray-800 truncate">${escapeHtml(card.title)}</p>
+                                <p class="text-[11px] text-gray-400 truncate">Folder ID: ${escapeHtml(card.targetFolderId || '')}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button onclick="openHomeCardModal('edit', ${idx})" class="bg-blue-50 text-blue-600 hover:bg-blue-100 px-2.5 py-1.5 rounded-lg text-xs font-semibold">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button onclick="deleteHomeCard(${idx})" class="bg-red-50 text-red-600 hover:bg-red-100 px-2.5 py-1.5 rounded-lg text-xs font-semibold">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openHomeCardModal(mode, index = null) {
+            homeCardModalState = { mode, editIndex: index };
+            const selectEl = document.getElementById('hc-target-folder');
+            const folders = getAllFoldersFlat(appData.items);
+
+            selectEl.innerHTML = folders.length > 0
+                ? folders.map(f => `<option value="${escapeHtml(f.id)}">${escapeHtml(f.label)}</option>`).join('')
+                : `<option value="">Pehle Folders tab mein folder banayein</option>`;
+
+            if (mode === 'edit' && index !== null) {
+                const card = appData.homeCards[index];
+                document.getElementById('home-card-modal-title').innerText = "Edit Home Card";
+                document.getElementById('hc-title').value = card.title || '';
+                document.getElementById('hc-image').value = card.image || '';
+                if (card.targetFolderId) selectEl.value = card.targetFolderId;
+            } else {
+                document.getElementById('home-card-modal-title').innerText = "Add Home Card";
+                document.getElementById('hc-title').value = '';
+                document.getElementById('hc-image').value = '';
+            }
+
+            document.getElementById('home-card-modal').classList.remove('hidden');
+        }
+
+        function closeHomeCardModal() {
+            document.getElementById('home-card-modal').classList.add('hidden');
+        }
+
+        function saveHomeCardModal() {
+            const title = document.getElementById('hc-title').value.trim();
+            const image = document.getElementById('hc-image').value.trim();
+            const targetFolderId = document.getElementById('hc-target-folder').value;
+
+            if (!title) return alert("Card Title zaroori hai!");
+            if (!targetFolderId) return alert("Target Folder chunein!");
+
+            if (!Array.isArray(appData.homeCards)) appData.homeCards = [];
+
+            if (homeCardModalState.mode === 'create') {
+                appData.homeCards.push({ id: 'hc_' + Date.now(), title, image, targetFolderId });
+            } else if (homeCardModalState.mode === 'edit' && homeCardModalState.editIndex !== null) {
+                appData.homeCards[homeCardModalState.editIndex] = {
+                    ...appData.homeCards[homeCardModalState.editIndex],
+                    title,
+                    image,
+                    targetFolderId
+                };
+            }
+
+            closeHomeCardModal();
+            renderAdminHomeCards();
+            renderPublicView();
+        }
+
+        function deleteHomeCard(index) {
+            if (!confirm("Kya aap is Home Card ko delete karna chahte hain?")) return;
+            appData.homeCards.splice(index, 1);
+            renderAdminHomeCards();
+            renderPublicView();
+        }
+
+        // --- Section 2: Folders & Question Papers ---
+        function renderAdminFolderView() {
+            const list = document.getElementById('admin-items-list');
+            const backBtn = document.getElementById('admin-back-btn');
+            const pathLabel = document.getElementById('admin-current-path');
+            const countLabel = document.getElementById('admin-item-count');
+
+            if (adminPathStack.length > 0) {
+                backBtn.classList.remove('hidden');
+                let names = ["Home"];
+                let curr = appData.items;
+                adminPathStack.forEach(id => {
+                    const f = curr.find(x => x.id === id);
+                    if (f) { names.push(f.title); curr = f.children || []; }
+                });
+                pathLabel.innerText = names.join(" / ");
+            } else {
+                backBtn.classList.add('hidden');
+                pathLabel.innerText = "Home";
+            }
+
+            const items = getCurrentFolderItems(adminPathStack);
+            countLabel.innerText = `${items.length} items`;
+            list.innerHTML = '';
+
+            if (items.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400 text-center py-6 bg-gray-50 rounded-xl border border-dashed">Folder khali hai.</p>`;
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const isFolder = item.type === 'folder';
+                const resolvedImg = resolveImageOrDriveUrl(item.image);
+                const extras = !isFolder
+                    ? [
+                        item.answerKeyLink ? 'Answer Keys' : null,
+                        item.syllabusLink ? 'Syllabus' : null
+                    ].filter(Boolean).join(' • ')
+                    : '';
+
+                list.innerHTML += `
+                    <div class="flex items-center justify-between bg-white border border-gray-200 hover:border-blue-300 p-2.5 rounded-xl text-sm gap-2">
+                        <div onclick="${isFolder ? `adminEnterFolder('${escapeJs(item.id)}')` : ''}" class="flex items-center gap-3 min-w-0 flex-grow ${isFolder ? 'cursor-pointer' : ''}">
+                            ${isFolder && resolvedImg
+                                ? `<img src="${escapeHtml(resolvedImg)}" alt="${escapeHtml(item.title)}" class="w-9 h-9 rounded-lg object-cover border bg-gray-100 shrink-0">`
+                                : `<div class="w-9 h-9 rounded-lg ${isFolder ? 'bg-amber-100 text-amber-600' : 'bg-red-50 text-red-600'} flex items-center justify-center text-base shrink-0 overflow-hidden">${renderSlotIcon(isFolder ? 'folderIcon' : 'pdfIcon', 'w-6 h-6 object-contain')}</div>`
+                            }
+                            <div class="truncate">
+                                <p class="font-semibold text-gray-800 truncate ${isFolder ? 'hover:text-blue-700' : ''}">${escapeHtml(item.title)}</p>
+                                <p class="text-[11px] text-gray-400 truncate">${isFolder ? `${(item.children || []).length} inside` : `Official Question Paper${extras ? ' • ' + extras : ''}`}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button onclick="openEditItemModal(${index})" title="Edit" class="bg-blue-50 text-blue-600 hover:bg-blue-100 px-2.5 py-1.5 rounded-lg text-xs font-semibold">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button onclick="deleteAdminItem(${index})" title="Delete" class="bg-red-50 text-red-600 hover:bg-red-100 px-2.5 py-1.5 rounded-lg text-xs font-semibold">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function adminEnterFolder(id) {
+            adminPathStack.push(id);
+            renderAdminFolderView();
+        }
+
+        function adminGoBack() {
+            adminPathStack.pop();
+            renderAdminFolderView();
+        }
+
+        function openCreateModal(type) {
+            formModalState = { mode: "create", type: type, editIndex: null };
+            document.getElementById('item-form-title').innerText = type === 'folder' ? "Create Folder" : "Add Official Question Paper";
+            document.getElementById('modal-item-title').value = '';
+            document.getElementById('modal-item-image').value = '';
+            document.getElementById('modal-item-link').value = '';
+            document.getElementById('modal-item-answer-key').value = '';
+            document.getElementById('modal-item-syllabus').value = '';
+
+            if (type === 'folder') {
+                document.getElementById('modal-field-image').classList.remove('hidden');
+                document.getElementById('modal-field-pdf-fields').classList.add('hidden');
+            } else {
+                document.getElementById('modal-field-image').classList.add('hidden');
+                document.getElementById('modal-field-pdf-fields').classList.remove('hidden');
+            }
+
+            document.getElementById('item-form-modal').classList.remove('hidden');
+        }
+
+        function openEditItemModal(index) {
+            const items = getCurrentFolderItems(adminPathStack);
+            const item = items[index];
+            if (!item) return;
+
+            formModalState = { mode: "edit", type: item.type, editIndex: index };
+            document.getElementById('item-form-title').innerText = item.type === 'folder' ? "Edit Folder & Image" : "Edit Paper, Answer Key & Syllabus Links";
+            document.getElementById('modal-item-title').value = item.title || '';
+
+            if (item.type === 'folder') {
+                document.getElementById('modal-field-image').classList.remove('hidden');
+                document.getElementById('modal-field-pdf-fields').classList.add('hidden');
+                document.getElementById('modal-item-image').value = item.image || '';
+            } else {
+                document.getElementById('modal-field-image').classList.add('hidden');
+                document.getElementById('modal-field-pdf-fields').classList.remove('hidden');
+                document.getElementById('modal-item-link').value = item.link || '';
+                document.getElementById('modal-item-answer-key').value = item.answerKeyLink || '';
+                document.getElementById('modal-item-syllabus').value = item.syllabusLink || '';
+            }
+
+            document.getElementById('item-form-modal').classList.remove('hidden');
+        }
+
+        function closeItemFormModal() {
+            document.getElementById('item-form-modal').classList.add('hidden');
+        }
+
+        function saveItemFormModal() {
+            const title = document.getElementById('modal-item-title').value.trim();
+            const image = document.getElementById('modal-item-image').value.trim();
+            const link = document.getElementById('modal-item-link').value.trim();
+            const answerKeyLink = document.getElementById('modal-item-answer-key').value.trim();
+            const syllabusLink = document.getElementById('modal-item-syllabus').value.trim();
+
+            if (!title) return alert("Name / Title zaroori hai!");
+            if (formModalState.type === 'pdf' && !link) return alert("Question Paper Link zaroori hai!");
+
+            const targetArray = getCurrentFolderItems(adminPathStack);
+
+            if (formModalState.mode === 'create') {
+                const newItem = {
+                    id: 'id_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                    type: formModalState.type,
+                    title: title
+                };
+                if (formModalState.type === 'folder') {
+                    newItem.image = image;
+                    newItem.children = [];
+                } else {
+                    newItem.link = link;
+                    newItem.answerKeyLink = answerKeyLink;
+                    newItem.syllabusLink = syllabusLink;
+                }
+                targetArray.push(newItem);
+            } else if (formModalState.mode === 'edit') {
+                const targetItem = targetArray[formModalState.editIndex];
+                if (targetItem) {
+                    targetItem.title = title;
+                    if (targetItem.type === 'folder') {
+                        targetItem.image = image;
+                    } else {
+                        targetItem.link = link;
+                        targetItem.answerKeyLink = answerKeyLink;
+                        targetItem.syllabusLink = syllabusLink;
+                    }
+                }
+            }
+
+            closeItemFormModal();
+            renderAdminFolderView();
+            renderPublicView();
+        }
+
+        function deleteAdminItem(index) {
+            if (!confirm("Kya aap is item ko delete karna chahte hain?")) return;
+            const targetArray = getCurrentFolderItems(adminPathStack);
+            targetArray.splice(index, 1);
+            renderAdminFolderView();
+            renderPublicView();
+        }
+
+        // --- Section 3: Menu & Notification Strip ---
+        function saveNoticeStripLocally() {
+            appData.settings.noticeStrip = {
+                text: document.getElementById('set-notice-text').value.trim(),
+                enabled: document.getElementById('set-notice-enabled').checked
+            };
+            renderSiteSettings();
+            alert("Running Notification Strip update ho gayi!");
+        }
+
+        function saveCoreMenuLinks() {
+            appData.settings.menuLinks = {
+                pyqPractice: document.getElementById('menu-link-pyq').value.trim(),
+                topicWiseTest: document.getElementById('menu-link-topic').value.trim(),
+                cbtPractice: document.getElementById('menu-link-cbt').value.trim()
+            };
+            renderDrawerMenu();
+            alert("Menu links update ho gaye!");
+        }
+
+        function renderAdminExtraMenu() {
+            const list = document.getElementById('admin-extra-menu-list');
+            const extra = appData.settings?.extraMenu || [];
+            if (extra.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">Koi extra menu section nahi hai.</p>`;
+                return;
+            }
+
+            list.innerHTML = extra.map((sec, idx) => `
+                <div class="flex items-center justify-between bg-white border rounded-lg px-3 py-2 text-xs gap-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span>${renderCustomIcon(sec.icon)}</span>
+                        <span class="font-bold text-gray-800 truncate">${escapeHtml(sec.label)}</span>
+                        <span class="text-gray-400 truncate hidden sm:inline">(${escapeHtml(sec.url)})</span>
+                    </div>
+                    <button onclick="deleteExtraMenuItem(${idx})" class="text-red-500 hover:bg-red-50 px-2 py-1 rounded shrink-0">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addExtraMenuItem() {
+            const icon = document.getElementById('extra-menu-icon').value.trim() || 'fa-link';
+            const label = document.getElementById('extra-menu-label').value.trim();
+            const url = document.getElementById('extra-menu-url').value.trim();
+
+            if (!label || !url) return alert("Section Name aur Link dono zaroori hain!");
+            if (!Array.isArray(appData.settings.extraMenu)) appData.settings.extraMenu = [];
+
+            appData.settings.extraMenu.push({ id: 'menu_' + Date.now(), icon, label, url });
+
+            document.getElementById('extra-menu-icon').value = '';
+            document.getElementById('extra-menu-label').value = '';
+            document.getElementById('extra-menu-url').value = '';
+
+            renderAdminExtraMenu();
+            renderDrawerMenu();
+        }
+
+        function deleteExtraMenuItem(index) {
+            appData.settings.extraMenu.splice(index, 1);
+            renderAdminExtraMenu();
+            renderDrawerMenu();
+        }
+
+        // --- Section 4: Pop-Up Rules ---
+        function savePrimaryPopupLocally() {
+            if (!appData.settings.popups) appData.settings.popups = { primary: {}, extra: [] };
+            appData.settings.popups.primary = {
+                enabled: document.getElementById('popup-primary-enabled').checked,
+                trigger: document.getElementById('popup-primary-trigger').value,
+                delaySec: Math.max(1, Number(document.getElementById('popup-primary-delay').value) || 30),
+                platform: document.getElementById('popup-primary-platform').value,
+                message: document.getElementById('popup-primary-message').value.trim() || 'Join Telegram Channel For Quick Update',
+                ctaText: document.getElementById('popup-primary-cta-text').value.trim() || 'Join',
+                link: document.getElementById('popup-primary-link').value.trim() || 'https://t.me',
+                customIcon: document.getElementById('popup-primary-custom-icon').value.trim()
+            };
+            firedPopupIds.delete('primary_popup');
+            schedulePopups();
+            alert("Primary Pop-Up settings save ho gayi!");
+        }
+
+        function renderAdminExtraPopups() {
+            const list = document.getElementById('admin-extra-popups-list');
+            const extra = appData.settings?.popups?.extra || [];
+            if (extra.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">Koi extra pop-up rule nahi hai.</p>`;
+                return;
+            }
+
+            list.innerHTML = extra.map((p, idx) => `
+                <div class="flex items-center justify-between bg-white border rounded-lg px-3 py-2 text-xs gap-2">
+                    <div class="min-w-0">
+                        <p class="font-bold text-gray-800 truncate">${escapeHtml(p.message)} (${escapeHtml(p.ctaText || 'Join')})</p>
+                        <p class="text-[11px] text-gray-400 truncate">Trigger: ${escapeHtml(p.trigger)} • Delay: ${escapeHtml(String(p.delaySec || 0))}s • ${escapeHtml(p.platform)}</p>
+                    </div>
+                    <button onclick="deleteExtraPopupRule(${idx})" class="text-red-500 hover:bg-red-50 px-2 py-1 rounded shrink-0">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addExtraPopupRule() {
+            const trigger = document.getElementById('extra-popup-trigger').value;
+            const delaySec = Math.max(0, Number(document.getElementById('extra-popup-delay').value) || 0);
+            const platform = document.getElementById('extra-popup-platform').value;
+            const message = document.getElementById('extra-popup-message').value.trim();
+            const ctaText = document.getElementById('extra-popup-cta').value.trim() || 'Join';
+            const link = document.getElementById('extra-popup-link').value.trim();
+            const customIcon = document.getElementById('extra-popup-icon').value.trim();
+
+            if (!message || !link) return alert("Message aur Link zaroori hain!");
+            if (!appData.settings.popups) appData.settings.popups = { primary: {}, extra: [] };
+            if (!Array.isArray(appData.settings.popups.extra)) appData.settings.popups.extra = [];
+
+            const rule = {
+                id: 'popup_' + Date.now(),
+                trigger,
+                delaySec,
+                platform,
+                message,
+                ctaText,
+                link,
+                customIcon
+            };
+            appData.settings.popups.extra.push(rule);
+
+            document.getElementById('extra-popup-delay').value = '';
+            document.getElementById('extra-popup-message').value = '';
+            document.getElementById('extra-popup-cta').value = '';
+            document.getElementById('extra-popup-link').value = '';
+            document.getElementById('extra-popup-icon').value = '';
+
+            renderAdminExtraPopups();
+            if (trigger === 'delay') {
+                setTimeout(() => showPromoPopup(rule), Math.max(1, delaySec) * 1000);
+            }
+        }
+
+        function deleteExtraPopupRule(index) {
+            appData.settings.popups.extra.splice(index, 1);
+            renderAdminExtraPopups();
+        }
+
+        // --- Section 5: Custom Icons Tab (With Icon Background Box Toggle) ---
+        function renderAdminCustomIconsTab() {
+            const grid = document.getElementById('admin-custom-icons-grid');
+            const icons = appData.settings?.customIcons || {};
+
+            grid.innerHTML = ICON_SLOTS.map(slot => {
+                const currentVal = icons[slot.key] || '';
+                const previewUrl = resolveImageOrDriveUrl(currentVal);
+                const bgChecked = isIconBgEnabled(slot.key);
+                return `
+                    <div class="bg-slate-50 border rounded-xl p-3 space-y-2" data-icon-slot-card="${escapeHtml(slot.key)}">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-bold text-slate-800">${escapeHtml(slot.label)}</span>
+                            <div class="w-8 h-8 rounded-lg ${bgChecked ? 'bg-white border' : 'bg-transparent'} flex items-center justify-center shrink-0 overflow-hidden">
+                                ${previewUrl
+                                    ? `<img src="${escapeHtml(previewUrl)}" class="w-full h-full object-contain">`
+                                    : (slot.defaultEmoji ? `<span class="text-sm">${slot.defaultEmoji}</span>` : `<i class="fas ${slot.defaultFa} text-slate-600 text-xs"></i>`)
+                                }
+                            </div>
+                        </div>
+                        <input
+                            type="url"
+                            data-icon-key="${escapeHtml(slot.key)}"
+                            value="${escapeHtml(currentVal)}"
+                            placeholder="Google Drive Link ya Image URL"
+                            class="custom-icon-input w-full border rounded-lg px-2.5 py-1.5 text-xs bg-white"
+                        >
+                        <label class="flex items-center gap-1.5 text-[11px] font-semibold text-gray-700">
+                            <input type="checkbox" class="icon-bg-toggle rounded" ${bgChecked ? 'checked' : ''}>
+                            Icon ke peeche Background Box rakhein
+                        </label>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function saveCustomIconsLocally() {
+            const updatedIcons = { ...(appData.settings.customIcons || {}) };
+            const updatedBg = { ...(appData.settings.iconBgConfig || {}) };
+
+            document.querySelectorAll('[data-icon-slot-card]').forEach(card => {
+                const key = card.getAttribute('data-icon-slot-card');
+                const inp = card.querySelector('.custom-icon-input');
+                const toggle = card.querySelector('.icon-bg-toggle');
+                updatedIcons[key] = inp ? inp.value.trim() : '';
+                updatedBg[key] = toggle ? toggle.checked : true;
+            });
+
+            appData.settings.customIcons = updatedIcons;
+            appData.settings.iconBgConfig = updatedBg;
+
+            renderSiteSettings();
+            renderDrawerMenu();
+            renderPublicView();
+            renderAdminCustomIconsTab();
+            alert("Custom Icons aur Background Box settings apply ho gayi!");
+        }
+
+        // --- Section 6: Text Font, Colour, Size, Style & Background Box ---
+        function renderAdminTextStylesTab() {
+            const wrap = document.getElementById('admin-text-styles-list');
+            const fonts = ["Poppins", "Baloo 2", "Roboto", "Montserrat", "Lora"];
+
+            wrap.innerHTML = TEXT_STYLE_SLOTS.map(slot => {
+                const st = getTextStyle(slot.key);
+                return `
+                    <div class="bg-slate-50 border rounded-xl p-3 space-y-2.5" data-style-slot="${escapeHtml(slot.key)}">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-slate-800">${escapeHtml(slot.label)}</span>
+                            <span class="text-[11px] text-gray-400">Preview: <strong style="font-family:'${st.fontFamily}',sans-serif;color:${st.color};${st.boxEnabled ? `background:${st.boxColor};padding:1px 6px;border-radius:4px;` : ''}">Sample Text</strong></span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            <div>
+                                <label class="text-[10px] font-bold text-gray-500">Font</label>
+                                <select class="ts-font w-full border rounded-lg px-2 py-1.5 bg-white mt-0.5">
+                                    ${fonts.map(f => `<option value="${f}" ${st.fontFamily === f ? 'selected' : ''}>${f}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-gray-500">Size (px)</label>
+                                <input type="number" min="10" max="44" value="${st.fontSize}" class="ts-size w-full border rounded-lg px-2 py-1.5 bg-white mt-0.5">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-gray-500">Text Colour</label>
+                                <input type="color" value="${st.color}" class="ts-color w-full h-8 border rounded-lg bg-white mt-0.5 cursor-pointer">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-gray-500">Box Colour</label>
+                                <input type="color" value="${st.boxColor}" class="ts-box-color w-full h-8 border rounded-lg bg-white mt-0.5 cursor-pointer">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4 text-xs pt-1">
+                            <label class="flex items-center gap-1.5 font-semibold text-gray-700">
+                                <input type="checkbox" class="ts-bold rounded" ${st.bold ? 'checked' : ''}> Bold
+                            </label>
+                            <label class="flex items-center gap-1.5 font-semibold text-gray-700">
+                                <input type="checkbox" class="ts-italic rounded" ${st.italic ? 'checked' : ''}> Italic
+                            </label>
+                            <label class="flex items-center gap-1.5 font-semibold text-gray-700">
+                                <input type="checkbox" class="ts-box-enabled rounded" ${st.boxEnabled ? 'checked' : ''}> Background Box Show
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function saveTextStylesLocally() {
+            const nextStyles = {};
+            document.querySelectorAll('[data-style-slot]').forEach(box => {
+                const key = box.getAttribute('data-style-slot');
+                nextStyles[key] = {
+                    fontFamily: box.querySelector('.ts-font').value,
+                    fontSize: Number(box.querySelector('.ts-size').value) || 14,
+                    color: box.querySelector('.ts-color').value,
+                    boxColor: box.querySelector('.ts-box-color').value,
+                    bold: box.querySelector('.ts-bold').checked,
+                    italic: box.querySelector('.ts-italic').checked,
+                    boxEnabled: box.querySelector('.ts-box-enabled').checked
+                };
+            });
+            appData.settings.textStyles = nextStyles;
+            renderSiteSettings();
+            renderPublicView();
+            renderAdminTextStylesTab();
+            alert("Text fonts, colours, size aur background box styles apply ho gaye!");
+        }
+
+        // --- Section 7: Header & Footer ---
+        function updateLayoutSettingsLocally() {
+            appData.settings.mainTitle = document.getElementById('set-main-title').value.trim() || "PYQ Papers";
+            appData.settings.subTitle = document.getElementById('set-sub-title').value.trim() || "All Govt Exam Papers";
+            appData.settings.searchPlaceholder = document.getElementById('set-search-placeholder').value.trim() || "Search paper...";
+            appData.settings.searchEnabled = document.getElementById('set-search-enabled').checked;
+            appData.settings.footerTitle = document.getElementById('set-footer-title').value.trim() || appData.settings.mainTitle;
+            appData.settings.footerTagline = document.getElementById('set-footer-tagline').value.trim() || "All Govt Exam Previous Year Question Papers";
+
+            appData.settings.socials = {
+                youtube: document.getElementById('set-yt').value.trim(),
+                telegram: document.getElementById('set-tg').value.trim(),
+                instagram: document.getElementById('set-ig').value.trim(),
+                facebook: document.getElementById('set-fb').value.trim()
+            };
+
+            renderSiteSettings();
+            renderDrawerMenu();
+            alert("Header aur Footer settings update ho gayi!");
+        }
+
+        // ==========================================
+        // 11. GITHUB API INTEGRATION (FINE-GRAINED TOKEN)
+        // ==========================================
+        function saveGithubConfig() {
+            localStorage.setItem('gh_owner', document.getElementById('gh-owner').value.trim());
+            localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
+            localStorage.setItem('gh_path', document.getElementById('gh-path').value.trim());
+            localStorage.setItem('gh_token', document.getElementById('gh-token').value.trim());
+            alert("GitHub Config browser mein save ho gayi!");
+        }
+
+        function loadGithubConfigToInputs() {
+            document.getElementById('gh-owner').value = localStorage.getItem('gh_owner') || DEFAULT_GH_OWNER;
+            document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || DEFAULT_GH_REPO;
+            document.getElementById('gh-path').value = localStorage.getItem('gh_path') || DEFAULT_GH_PATH;
+            document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
+        }
+
+        async function pushToGitHub() {
+            const owner = localStorage.getItem('gh_owner') || DEFAULT_GH_OWNER;
+            const repo = localStorage.getItem('gh_repo') || DEFAULT_GH_REPO;
+            const path = localStorage.getItem('gh_path') || DEFAULT_GH_PATH;
+            const token = localStorage.getItem('gh_token');
+
+            if (!token) {
+                switchAdminTab('github');
+                return alert("Pehle 8. GitHub Sync tab mein apna Fine-Grained Token save karein!");
+            }
+
+            const btn = document.getElementById('publish-btn');
+            const status = document.getElementById('sync-status');
+            btn.disabled = true;
+            status.innerText = "Publishing to GitHub...";
+
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+            try {
+                let sha = null;
+                const getRes = await fetch(apiUrl, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                }
+
+                const jsonString = JSON.stringify(appData, null, 2);
+                const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: "Update PYQ Papers portal via Admin Studio",
+                        content: base64Content,
+                        ...(sha && { sha })
+                    })
+                });
+
+                if (putRes.ok) {
+                    status.innerText = "Live on GitHub!";
+                    alert("Safaltapurvak GitHub par save ho gaya!");
+                } else {
+                    const err = await putRes.json();
+                    status.innerText = "Error!";
+                    alert("GitHub Error: " + (err.message || "Token permissions check karein"));
+                }
+            } catch (error) {
+                status.innerText = "Network Error";
+                alert("Error: " + error.message);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        initApp();
+    </script>
+</body>
+</html>
