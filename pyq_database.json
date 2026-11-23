@@ -234,7 +234,109 @@
       "type": "folder",
       "title": "Study Materials",
       "image": "",
-      "children": []
+      "children": [
+        {
+          "id": "id_1795398230297_vvf3",
+          "type": "folder",
+          "title": "Indian GS",
+          "image": "",
+          "children": [
+            {
+              "id": "id_1795398531682_ysoe",
+              "type": "folder",
+              "title": "History",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398541236_lgba",
+              "type": "folder",
+              "title": "Geography",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398548279_2rjf",
+              "type": "folder",
+              "title": "Polity",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398559525_tz3c",
+              "type": "folder",
+              "title": "Economics",
+              "image": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "id_1795398241991_87k2",
+          "type": "folder",
+          "title": "Chhattisgarh GS",
+          "image": "",
+          "children": []
+        },
+        {
+          "id": "id_1795398284692_ssrm",
+          "type": "folder",
+          "title": "Language Subjects",
+          "image": "",
+          "children": [
+            {
+              "id": "id_1795398438098_olr9",
+              "type": "folder",
+              "title": "English",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398458342_xj1y",
+              "type": "folder",
+              "title": "Hindi",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398475389_kf43",
+              "type": "folder",
+              "title": "Chhattisgarhi",
+              "image": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "id_1795398314876_3w0h",
+          "type": "folder",
+          "title": "Other Subjects",
+          "image": "",
+          "children": [
+            {
+              "id": "id_1795398348971_8m5s",
+              "type": "folder",
+              "title": "Maths",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398364350_ob7p",
+              "type": "folder",
+              "title": "Reasoning & Aptitude",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795398377891_w8c5",
+              "type": "folder",
+              "title": "Computer",
+              "image": "",
+              "children": []
+            }
+          ]
+        }
+      ]
     }
   ]
 }
