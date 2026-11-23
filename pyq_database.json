@@ -149,7 +149,7 @@
         {
           "id": "f1_2024",
           "type": "folder",
-          "title": "2024 Question Papers",
+          "title": "CGPSC Pre",
           "image": "",
           "children": [
             {
@@ -168,8 +168,29 @@
               "link": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk",
               "answerKeyLink": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk",
               "syllabusLink": "https://drive.google.com/file/d/1lNIguMdr2_PulsiPtqqazse-VavDoT4F/view?usp=drivesdk"
+            },
+            {
+              "id": "id_1795397600016_5mzj",
+              "type": "folder",
+              "title": "GS Paper 1 (General Studies)",
+              "image": "",
+              "children": []
+            },
+            {
+              "id": "id_1795397675134_12z2",
+              "type": "folder",
+              "title": "Paper 2 (Aptitude Test)",
+              "image": "",
+              "children": []
             }
           ]
+        },
+        {
+          "id": "id_1795397487977_lsh3",
+          "type": "folder",
+          "title": "CGPSC Mains",
+          "image": "",
+          "children": []
         }
       ]
     },
